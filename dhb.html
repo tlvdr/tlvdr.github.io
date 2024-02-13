@@ -430,9 +430,80 @@
     }
   </style>
 
-  
 <!-- render-head end -->
 <!--render body head beginning-->
+<body>
+
+  <script src="glider.js"></script>
+  <script>
+    window.addEventListener('load',function(){
+      document.querySelector('.glider').addEventListener('glider-slide-visible', function(event){
+          var glider = Glider(this);
+          console.log('Slide Visible %s', event.detail.slide)
+      });
+      document.querySelector('.glider').addEventListener('glider-slide-hidden', function(event){
+          console.log('Slide Hidden %s', event.detail.slide)
+      });
+      document.querySelector('.glider').addEventListener('glider-refresh', function(event){
+          console.log('Refresh')
+      });
+      document.querySelector('.glider').addEventListener('glider-loaded', function(event){
+          console.log('Loaded')
+      });
+
+      window._ = new Glider(document.querySelector('.glider'), {
+          slidesToShow: 1, //'auto',
+          slidesToScroll: 1,
+          itemWidth: 150,
+          draggable: true,
+          scrollLock: false,
+          dots: '#dots',
+          rewind: true,
+          arrows: {
+              prev: '.glider-prev',
+              next: '.glider-next'
+          },
+          responsive: [
+              {
+                  breakpoint: 800,
+                  settings: {
+                      slidesToScroll: 'auto',
+                      itemWidth: 300,
+                      slidesToShow: 'auto',
+                      exactWidth: true
+                  }
+              },
+              {
+                  breakpoint: 700,
+                  settings: {
+                      slidesToScroll: 4,
+                      slidesToShow: 4,
+                      dots: false,
+                      arrows: false,
+                  }
+              },
+              {
+                  breakpoint: 600,
+                  settings: {
+                      slidesToScroll: 3,
+                      slidesToShow: 3
+                  }
+              },
+              {
+                  breakpoint: 500,
+                  settings: {
+                      slidesToScroll: 2,
+                      slidesToShow: 2,
+                      dots: false,
+                      arrows: false,
+                      scrollLock: true
+                  }
+              }
+          ]
+      });
+    });
+  </script>
+
 
 <style>
   .YzqVVZ {
@@ -1941,7 +2012,11 @@
 
 <title>DHB | tessavanderriet</title>
   <link rel="canonical" href="dhb.html"/>
+<<<<<<< HEAD
   <link rel="icon" href="images/logo.png">
+=======
+  <link rel="stylesheet" type="text/css" href="glider.css">
+>>>>>>> 17105a9 (updates hemelsebloem en festivals)
   <meta property="og:title" content="DHB | tessavanderriet"/>
   <meta property="og:url" content="https://www.tessavanderriet.com/dhb.html"/>
   <meta property="og:site_name" content="tessavanderriet"/>
@@ -1950,6 +2025,7 @@
   <meta name="twitter:title" content="DHB | tessavanderriet"/>
 
 <!--render body head end-->
+
 
 
 <pages-css id="pages-css">
@@ -2417,7 +2493,11 @@ font-display: block;
                         data-testid="linkElement" href="index.html" target="_self" class="j7pOnl"><wow-image
                           id="img_comp-kmt2b2i2" class="HlRz5e BI8PVQ"><img
                             src="images/TessavanderRiet_LogoWebsite.webp" alt="TessavanderRiet_LogoWebsite.webp"
-                            type="image/webp" style="width:264px;height:56px;object-fit:cover" /></wow-image></a></div>
+                            type="image/webp" style="width:264px;height:56px;object-fit:cover"
+                            /></wow-image></a>
+                            <div class="font_9" style="font-size:14px;text-align:center;">
+                              <span><b>DIRECTOR&nbsp;&nbsp;|&nbsp;&nbsp;PHOTOGRAPHER</b></span>
+                            </div></div>
                     <div class="comp-kowv06to S3GIZZ" id="comp-kowv06to" aria-disabled="false"><a
                         data-testid="linkElement" href="videos.html" target="_self" class="U2uNPe spixui-button zKbzSQ"
                         aria-disabled="false"><span class="CQ3ICl spixui-button__label">FILM</span></a></div>
@@ -2467,6 +2547,9 @@ font-display: block;
                                     (learned) patterns of guilt and shame surrounding body image and sexuality, and
                                     learn to put their own physical pleasure and self-image
                                     first.</span></span></span></span></p>
+                                    <br>
+                                    <br>
+                                    <br>
                         </div>
                         <div id="comp-l8bfrp0m">
                           <div class="comp-l8bfrp0m">
@@ -2492,547 +2575,548 @@ font-display: block;
  .pro-gallery-empty{top:0;left:0;height:100%;width:100%;background-color:rgba(255,255,255,.9)} .pro-gallery-empty .pro-gallery-empty-content{height:334px;width:100%;overflow:hidden} .pro-gallery-empty .pro-gallery-empty-image{margin:66px auto 35px;width:262px;height:132px;background-image:url(https://www.tessavanderriet.com/media/emptystate.85a4add5.svg);background-size:contain} .pro-gallery-empty .pro-gallery-empty-title{color:#4eb7f5;font-family:"HelveticaNeueW01-55Roma","HelveticaNeueW02-55Roma","HelveticaNeueW10-55Roma",sans-serif;font-size:20px;line-height:25px;text-align:center;margin-bottom:10px} .pro-gallery-empty .pro-gallery-empty-info{color:#4eb7f5;font-family:"HelveticaNeueW01-45Ligh","HelveticaNeueW02-45Ligh","HelveticaNeueW10-45Ligh",sans-serif;font-size:14px;line-height:20px;text-align:center}
  .lQWuNO{display:block;width:100%;height:100%} .lQWuNO img{max-width:var(--spix-img-max-width, 100%)} .lQWuNO[data-animate-blur] img{filter:blur(9px);transition:filter .8s ease-in} .lQWuNO[data-animate-blur] img[data-load-done]{filter:none}
                               </style>
-<style>
-  .comp-l8bfrp0m div.pro-gallery-parent-container .gallery-item-wrapper-text .gallery-item-content {
-    background-color: #301D10
-  }
-
-  .comp-l8bfrp0m div.pro-gallery-parent-container .show-more-container i.show-more {
-    color: rgba(0, 0, 0, 0.7)
-  }
-
-  .comp-l8bfrp0m div.pro-gallery-parent-container .show-more-container button.show-more {
-    --loadMoreButtonBorderRadius: 0;
-    --loadMoreButtonBorderColor: #301D10;
-    --loadMoreButtonBorderWidth: 1;
-    --loadMoreButtonColor: #F8F4F1;
-    --loadMoreButtonFont: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    --loadMoreButtonFontColor: #301D10;
-    color: rgba(48, 29, 16, 0.9);
-    font: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    text-decoration: ;
-    background: rgb(248, 244, 241);
-    border-width: 1px;
-    border-color: rgb(48, 29, 16);
-    border-radius: 0px
-  }
-
-  .comp-l8bfrp0m div.pro-gallery-parent-container .show-more-container.pro-gallery-mobile-indicator i.show-more {
-    color: rgba(0, 0, 0, 0.7)
-  }
-
-  .comp-l8bfrp0m div.pro-gallery-parent-container .show-more-container.pro-gallery-mobile-indicator button.show-more {
-    --loadMoreButtonBorderRadius: 0;
-    --loadMoreButtonBorderColor: #301D10;
-    --loadMoreButtonBorderWidth: 1;
-    --loadMoreButtonColor: #F8F4F1;
-    --loadMoreButtonFont: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    --loadMoreButtonFontColor: #301D10;
-    color: rgb(48, 29, 16);
-    font: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    text-decoration: ;
-    background: rgb(248, 244, 241);
-    border-width: undefinedpx;
-    border-color: rgb(48, 29, 16);
-    border-radius: undefinedpx
-  }
-
-  .comp-l8bfrp0m .nav-arrows-container .slideshow-arrow,
-  .comp-l8bfrp0m .nav-arrows-container .custom-nav-arrows svg {
-    --arrowsColor: #F8F4F1;
-    fill: rgb(248, 244, 241)
-  }
-
-  .comp-l8bfrp0m .nav-arrows-container.pro-gallery-mobile-indicator .slideshow-arrow,
-  .comp-l8bfrp0m .nav-arrows-container.pro-gallery-mobile-indicator .custom-nav-arrows svg {
-    --arrowsColor: #F8F4F1;
-    fill: rgb(248, 244, 241)
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .auto-slideshow-counter {
-    --itemDescriptionFontSlideshow: normal normal normal 15px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    --itemDescriptionFontColorSlideshow: #301D10;
-    color: rgb(48, 29, 16) !important;
-    font: normal normal normal 15px/18px avenir-lt-w01_35-light1475496, avenir-lt-w05_35-light, sans-serif;
-    text-decoration:
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info {
-    --itemIconColorSlideshow: #301D10
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info i:not(.pro-gallery-loved):not(.info-element-loved),
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info button:not(.pro-gallery-loved):not(.info-element-loved):not(.info-element-custom-button-button):not(.artstore-add-to-cart-button),
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info a {
-    color: rgb(48, 29, 16) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info svg .gallery-item-svg-foreground {
-    fill: rgb(48, 29, 16) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .gallery-item-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .info-element-title {
-    --itemFontSlideshow: normal normal normal 22px/1.4em raleway, sans-serif;
-    --itemFontColorSlideshow: #301D10;
-    color: rgb(48, 29, 16) !important;
-    font: normal normal normal 22px/27px avenir-lt-w01_85-heavy1475544, avenir-lt-w05_85-heavy, sans-serif !important;
-    text-decoration:
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .gallery-item-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .info-element-description {
-    --itemDescriptionFontSlideshow: normal normal normal 15px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    --itemDescriptionFontColorSlideshow: #301D10;
-    color: rgb(48, 29, 16) !important;
-    font: normal normal normal 15px/18px avenir-lt-w01_35-light1475496, avenir-lt-w05_35-light, sans-serif !important;
-    text-decoration:
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item.load-with-color:not(.image-loaded) {
-    --imageLoadingColor: #C6C3C1;
-    background-color: rgb(198, 195, 193)
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item.gallery-item-video i.gallery-item-video-play-triangle {
-    --itemFontColor: #F8F4F1;
-    color: rgb(248, 244, 241)
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item.gallery-item-video i.gallery-item-video-play-background {
-    --itemOpacity: #301D10;
-    color: rgba(99, 98, 96, 0.6)
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-slideshow-info svg .gallery-item-svg-background,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover svg .gallery-item-svg-background {
-    --itemOpacity: #301D10;
-    fill: rgba(99, 98, 96, 0.6)
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-slideshow-info .gradient-top,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .gradient-top {
-    --itemOpacity: #301D10;
-    background: linear-gradient(rgba(99, 98, 96, 0.6) 0, transparent 140px) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover {
-    --itemIconColor: #F8F4F1
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover i:not(.pro-gallery-loved):not(.info-element-loved),
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover button:not(.pro-gallery-loved):not(.info-element-loved):not(.info-element-custom-button-button),
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover a {
-    color: rgb(248, 244, 241) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover svg .gallery-item-svg-foreground {
-    fill: rgb(248, 244, 241) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .gallery-item-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .info-element-title {
-    --itemFont: normal normal normal 22px/1.4em raleway, sans-serif;
-    --itemFontColor: #F8F4F1;
-    color: rgb(248, 244, 241);
-    font: normal normal normal 22px/1.4em raleway, sans-serif;
-    text-decoration:
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .gallery-item-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .info-element-description {
-    --itemDescriptionFont: normal normal normal 15px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    --itemDescriptionFontColor: #F8F4F1;
-    color: rgb(248, 244, 241) !important;
-    font: normal normal normal 15px/18px avenir-lt-w01_35-light1475496, avenir-lt-w05_35-light, sans-serif;
-    text-decoration:
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .custom-button-wrapper,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .info-element-custom-button-wrapper {
-    --customButtonFontColor: #F8F4F1;
-    color: rgb(248, 244, 241) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .info-element-custom-button-wrapper button {
-    --customButtonColor: #301D10;
-    --customButtonBorderRadius: 0;
-    --customButtonBorderWidth: 1;
-    --customButtonBorderColor: #F8F4F1;
-    --customButtonFont: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    color: rgb(248, 244, 241) !important;
-    font: normal normal normal 15px/18px din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    text-decoration: ;
-    background: rgba(248, 244, 241, 0) !important;
-    border-width: 1px;
-    border-radius: 0px;
-    border-color: rgb(248, 244, 241)
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container:not(.invert-hover) .gallery-item-hover:before {
-    --itemOpacity: #301D10;
-    background: rgba(99, 98, 96, 0.6) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container:not(.invert-hover) .gallery-item-hover.default.force-hover:before,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container:not(.invert-hover):hover .gallery-item-hover.default:not(.hide-hover):before {
-    background: #301D10 !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.invert-hover .gallery-item-hover:before {
-    --itemOpacity: #301D10;
-    background: rgba(99, 98, 96, 0.6) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.invert-hover .gallery-item-hover.default.force-hover:before,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.invert-hover:hover .gallery-item-hover.default:not(.hide-hover):before {
-    background: #301D10 !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-bottom-info .gallery-item-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-bottom-info .info-element-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-top-info .gallery-item-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-top-info .info-element-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-left-info .gallery-item-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-left-info .info-element-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-right-info .gallery-item-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-right-info .info-element-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .gallery-item-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .info-element-title {
-    --itemFontSlideshow: normal normal normal 22px/1.4em raleway, sans-serif;
-    --itemFontColorSlideshow: #301D10;
-    color: rgb(48, 29, 16) !important;
-    font: normal normal normal 22px/27px avenir-lt-w01_85-heavy1475544, avenir-lt-w05_85-heavy, sans-serif !important;
-    text-decoration:
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-bottom-info .gallery-item-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-bottom-info .info-element-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-top-info .gallery-item-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-top-info .info-element-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-left-info .gallery-item-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-left-info .info-element-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-right-info .gallery-item-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-right-info .info-element-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .gallery-item-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .info-element-description {
-    --itemDescriptionFontColorSlideshow: #301D10;
-    --itemDescriptionFontSlideshow: normal normal normal 15px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    color: rgb(48, 29, 16) !important;
-    font: normal normal normal 15px/18px avenir-lt-w01_35-light1475496, avenir-lt-w05_35-light, sans-serif !important;
-    text-decoration:
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-text .custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-text .info-element-custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-bottom-info .custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-bottom-info .info-element-custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-top-info .custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-top-info .info-element-custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-left-info .custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-left-info .info-element-custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-right-info .custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-right-info .info-element-custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .info-element-custom-button-wrapper button {
-    --customButtonFontForHover: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    --customButtonFontColorForHover: #301D10;
-    --externalCustomButtonBorderWidth: 0;
-    --externalCustomButtonBorderRadius: 0;
-    font: normal normal normal 15px/18px din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    text-decoration: ;
-    color: rgb(48, 29, 16) !important;
-    background: rgba(163, 74, 33, 0) !important;
-    border-color: rgb(48, 29, 16);
-    border-width: 0px;
-    border-radius: 0px
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item.load-with-color:not(.image-loaded) {
-    --imageLoadingColor: #C6C3C1;
-    background-color: rgb(198, 195, 193)
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item.gallery-item-video i.gallery-item-video-play-triangle {
-    --itemFontColor: #F8F4F1;
-    color: rgb(248, 244, 241)
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item.gallery-item-video i.gallery-item-video-play-background {
-    --itemOpacity: #301D10;
-    color: rgba(99, 98, 96, 0.6) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info svg .gallery-item-svg-background,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover svg .gallery-item-svg-background {
-    --itemOpacity: #301D10;
-    fill: rgba(99, 98, 96, 0.6) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info .gradient-top,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .gradient-top {
-    --itemOpacity: #301D10;
-    background: linear-gradient(rgba(99, 98, 96, 0.6) 0, transparent 140px) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info {
-    --itemIconColorSlideshow: #301D10
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info i:not(.pro-gallery-loved):not(.info-element-loved),
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info button:not(.pro-gallery-loved):not(.info-element-loved):not(.info-element-custom-button-button):not(.artstore-add-to-cart-button),
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info a {
-    color: rgb(48, 29, 16) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info svg .gallery-item-svg-foreground {
-    fill: rgb(48, 29, 16) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info .gallery-item-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info .info-element-title {
-    --itemFontSlideshow: normal normal normal 22px/1.4em raleway, sans-serif;
-    --itemFontColorSlideshow: #301D10;
-    color: rgb(48, 29, 16) !important;
-    font: normal normal normal 22px/27px avenir-lt-w01_85-heavy1475544, avenir-lt-w05_85-heavy, sans-serif !important;
-    text-decoration:
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info .gallery-item-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info .info-element-description {
-    --itemDescriptionFontSlideshow: normal normal normal 15px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    --itemDescriptionFontColorSlideshow: #301D10;
-    color: rgb(48, 29, 16) !important;
-    font: normal normal normal 15px/18px avenir-lt-w01_35-light1475496, avenir-lt-w05_35-light, sans-serif !important;
-    text-decoration:
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover {
-    --itemIconColor: #F8F4F1
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover i:not(.pro-gallery-loved):not(.info-element-loved),
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover button:not(.pro-gallery-loved):not(.info-element-loved):not(.info-element-custom-button-button),
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover a {
-    color: rgb(248, 244, 241) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover svg .gallery-item-svg-foreground {
-    fill: rgb(248, 244, 241) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .gallery-item-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .info-element-title {
-    --itemFont: normal normal normal 22px/1.4em raleway, sans-serif;
-    --itemFontColor: #F8F4F1;
-    color: rgb(248, 244, 241);
-    font: normal normal normal 22px/1.4em raleway, sans-serif;
-    text-decoration:
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .gallery-item-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .info-element-description {
-    --itemDescriptionFont: normal normal normal 15px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    --itemDescriptionFontColor: #F8F4F1;
-    color: rgb(248, 244, 241) !important;
-    font: normal normal normal 15px/18px avenir-lt-w01_35-light1475496, avenir-lt-w05_35-light, sans-serif;
-    text-decoration:
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .custom-button-wrapper,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .info-element-custom-button-wrapper {
-    --customButtonFontColor: #F8F4F1;
-    color: rgb(248, 244, 241) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .info-element-custom-button-wrapper button {
-    --customButtonColor: #301D10;
-    --customButtonBorderRadius: 0;
-    --customButtonBorderWidth: 1;
-    --customButtonBorderColor: #F8F4F1;
-    --customButtonFont: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    color: rgb(248, 244, 241) !important;
-    font: normal normal normal 15px/18px din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    text-decoration: ;
-    background: rgba(248, 244, 241, 0) !important;
-    border-width: undefinedpx;
-    border-radius: undefinedpx;
-    border-color: rgb(248, 244, 241)
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator:not(.invert-hover) .gallery-item-hover:not(.hide-hover):before {
-    --itemOpacity: #301D10;
-    background: rgba(99, 98, 96, 0.6) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator:not(.invert-hover) .gallery-item-hover.default.force-hover:before,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator:not(.invert-hover):hover .gallery-item-hover.default:not(.hide-hover):before {
-    background: #301D10 !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator.invert-hover .gallery-item-hover:before {
-    --itemOpacity: #301D10;
-    background: rgba(99, 98, 96, 0.6) !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator.invert-hover .gallery-item-hover.default.force-hover:before,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator.invert-hover:hover .gallery-item-hover.default:not(.hide-hover):before {
-    background: #301D10 !important
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-bottom-info .gallery-item-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-bottom-info .info-element-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-top-info .gallery-item-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-top-info .info-element-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-left-info .gallery-item-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-left-info .info-element-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-right-info .gallery-item-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-right-info .info-element-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-slideshow-info .gallery-item-title,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-slideshow-info .info-element-title {
-    --itemFontSlideshow: normal normal normal 22px/1.4em raleway, sans-serif;
-    --itemFontColorSlideshow: #301D10;
-    color: rgb(48, 29, 16) !important;
-    font: normal normal normal 22px/27px avenir-lt-w01_85-heavy1475544, avenir-lt-w05_85-heavy, sans-serif !important;
-    text-decoration:
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-bottom-info .gallery-item-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-bottom-info .info-element-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-top-info .gallery-item-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-top-info .info-element-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-left-info .gallery-item-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-left-info .info-element-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-right-info .gallery-item-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-right-info .info-element-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-slideshow-info .gallery-item-description,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-slideshow-info .info-element-description {
-    --itemDescriptionFontColorSlideshow: #301D10;
-    --itemDescriptionFontSlideshow: normal normal normal 15px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    color: rgb(48, 29, 16) !important;
-    font: normal normal normal 15px/18px avenir-lt-w01_35-light1475496, avenir-lt-w05_35-light, sans-serif !important;
-    text-decoration:
-  }
-
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-text .custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-text .info-element-custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-bottom-info .custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-bottom-info .info-element-custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-top-info .custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-top-info .info-element-custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-left-info .custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-left-info .info-element-custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-right-info .custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-right-info .info-element-custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-slideshow-info .custom-button-wrapper button,
-  .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-slideshow-info .info-element-custom-button-wrapper button {
-    --customButtonFontForHover: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    --customButtonFontColorForHover: #301D10;
-    --externalCustomButtonBorderWidth: 0;
-    --externalCustomButtonBorderRadius: 0;
-    font: normal normal normal 15px/18px din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    text-decoration: ;
-    color: rgb(48, 29, 16) !important;
-    background: rgba(163, 74, 33, 0) !important;
-    border-color: rgb(48, 29, 16);
-    border-width: undefinedpx;
-    border-radius: undefinedpx
-  }
-
-  .comp-l8bfrp0m .te-pro-gallery-text-item {
-    font: normal normal normal 13px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    color: #F8F4F1
-  }
-
-  .comp-l8bfrp0m .pro-fullscreen-wrapper .pro-fullscreen-text-item {
-    --fullscreen-text-item-bg: #301D10;
-    background-color: #301D10
-  }
-
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles {
-    --bgColorExpand: #F8F4F1;
-    background-color: rgb(248, 244, 241)
-  }
-
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .pro-fullscreen-selected-license,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .pro-fullscreen-checkout-link {
-    --descriptionColorExpand: #301D10;
-    --descriptionFontExpand: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    color: rgb(48, 29, 16);
-    font: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    text-decoration:
-  }
-
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-bottom-mobile-info {
-    --bgColorExpand: #F8F4F1;
-    background-color: rgb(248, 244, 241)
-  }
-
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-title {
-    --titleColorExpand: #301D10;
-    --titleFontExpand: normal normal normal 22px/1.4em raleway, sans-serif;
-    color: rgb(48, 29, 16);
-    font: normal normal bold 36px/1.4em raleway, sans-serif;
-    text-decoration:
-  }
-
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-description,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-description .fullscreen-side-bar-description-line,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-exif,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-link,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-bottom-link {
-    --descriptionColorExpand: #301D10;
-    --descriptionFontExpand: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    color: rgb(48, 29, 16);
-    font: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
-    text-decoration:
-  }
-
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-description:after,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-description .fullscreen-side-bar-description-line:after,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-exif:after,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-link:after,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-bottom-link:after {
-    --descriptionColorExpand: #301D10;
-    border-color: rgb(48, 29, 16)
-  }
-
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-social i:not(.pro-gallery-loved),
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-social a,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-social button,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-nav i:not(.pro-gallery-loved),
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-nav a,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-nav button,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-mobile-bar i:not(.pro-gallery-loved),
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-mobile-bar a,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-mobile-bar button,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-social i:not(.pro-gallery-loved),
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-social a,
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-social button {
-    --descriptionColorExpand: #301D10;
-    color: rgb(48, 29, 16)
-  }
-
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles i.fullscreen-item-video-play.progallery-svg-font-icons-play-triangle {
-    --descriptionColorExpand: #301D10;
-    color: rgb(48, 29, 16)
-  }
-
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles i.fullscreen-item-video-play.progallery-svg-font-icons-play-background {
-    --bgColorExpand: #F8F4F1;
-    color: rgb(248, 244, 241)
-  }
-
-  .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-icon {
-    --descriptionColorExpand: #301D10;
-    --bgColorExpand: #F8F4F1;
-    color: rgb(48, 29, 16);
-    background: rgb(248, 244, 241)
-  }
-</style>
+                            <style>
+                            .comp-l8bfrp0m div.pro-gallery-parent-container .gallery-item-wrapper-text .gallery-item-content {
+                              background-color: #301D10
+                            }
+
+                            .comp-l8bfrp0m div.pro-gallery-parent-container .show-more-container i.show-more {
+                              color: rgba(0, 0, 0, 0.7)
+                            }
+
+                            .comp-l8bfrp0m div.pro-gallery-parent-container .show-more-container button.show-more {
+                              --loadMoreButtonBorderRadius: 0;
+                              --loadMoreButtonBorderColor: #301D10;
+                              --loadMoreButtonBorderWidth: 1;
+                              --loadMoreButtonColor: #F8F4F1;
+                              --loadMoreButtonFont: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              --loadMoreButtonFontColor: #301D10;
+                              color: rgba(48, 29, 16, 0.9);
+                              font: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              text-decoration: ;
+                              background: rgb(248, 244, 241);
+                              border-width: 1px;
+                              border-color: rgb(48, 29, 16);
+                              border-radius: 0px
+                            }
+
+                            .comp-l8bfrp0m div.pro-gallery-parent-container .show-more-container.pro-gallery-mobile-indicator i.show-more {
+                              color: rgba(0, 0, 0, 0.7)
+                            }
+
+                            .comp-l8bfrp0m div.pro-gallery-parent-container .show-more-container.pro-gallery-mobile-indicator button.show-more {
+                              --loadMoreButtonBorderRadius: 0;
+                              --loadMoreButtonBorderColor: #301D10;
+                              --loadMoreButtonBorderWidth: 1;
+                              --loadMoreButtonColor: #F8F4F1;
+                              --loadMoreButtonFont: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              --loadMoreButtonFontColor: #301D10;
+                              color: rgb(48, 29, 16);
+                              font: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              text-decoration: ;
+                              background: rgb(248, 244, 241);
+                              border-width: undefinedpx;
+                              border-color: rgb(48, 29, 16);
+                              border-radius: undefinedpx
+                            }
+
+                            .comp-l8bfrp0m .nav-arrows-container .slideshow-arrow,
+                            .comp-l8bfrp0m .nav-arrows-container .custom-nav-arrows svg {
+                              --arrowsColor: #F8F4F1;
+                              fill: rgb(248, 244, 241)
+                            }
+
+                            .comp-l8bfrp0m .nav-arrows-container.pro-gallery-mobile-indicator .slideshow-arrow,
+                            .comp-l8bfrp0m .nav-arrows-container.pro-gallery-mobile-indicator .custom-nav-arrows svg {
+                              --arrowsColor: #F8F4F1;
+                              fill: rgb(248, 244, 241)
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .auto-slideshow-counter {
+                              --itemDescriptionFontSlideshow: normal normal normal 15px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              --itemDescriptionFontColorSlideshow: #301D10;
+                              color: rgb(48, 29, 16) !important;
+                              font: normal normal normal 15px/18px avenir-lt-w01_35-light1475496, avenir-lt-w05_35-light, sans-serif;
+                              text-decoration:
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info {
+                              --itemIconColorSlideshow: #301D10
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info i:not(.pro-gallery-loved):not(.info-element-loved),
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info button:not(.pro-gallery-loved):not(.info-element-loved):not(.info-element-custom-button-button):not(.artstore-add-to-cart-button),
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info a {
+                              color: rgb(48, 29, 16) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info svg .gallery-item-svg-foreground {
+                              fill: rgb(48, 29, 16) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .gallery-item-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .info-element-title {
+                              --itemFontSlideshow: normal normal normal 22px/1.4em raleway, sans-serif;
+                              --itemFontColorSlideshow: #301D10;
+                              color: rgb(48, 29, 16) !important;
+                              font: normal normal normal 22px/27px avenir-lt-w01_85-heavy1475544, avenir-lt-w05_85-heavy, sans-serif !important;
+                              text-decoration:
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .gallery-item-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .info-element-description {
+                              --itemDescriptionFontSlideshow: normal normal normal 15px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              --itemDescriptionFontColorSlideshow: #301D10;
+                              color: rgb(48, 29, 16) !important;
+                              font: normal normal normal 15px/18px avenir-lt-w01_35-light1475496, avenir-lt-w05_35-light, sans-serif !important;
+                              text-decoration:
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item.load-with-color:not(.image-loaded) {
+                              --imageLoadingColor: #C6C3C1;
+                              background-color: rgb(198, 195, 193)
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item.gallery-item-video i.gallery-item-video-play-triangle {
+                              --itemFontColor: #F8F4F1;
+                              color: rgb(248, 244, 241)
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item.gallery-item-video i.gallery-item-video-play-background {
+                              --itemOpacity: #301D10;
+                              color: rgba(99, 98, 96, 0.6)
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-slideshow-info svg .gallery-item-svg-background,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover svg .gallery-item-svg-background {
+                              --itemOpacity: #301D10;
+                              fill: rgba(99, 98, 96, 0.6)
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-slideshow-info .gradient-top,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .gradient-top {
+                              --itemOpacity: #301D10;
+                              background: linear-gradient(rgba(99, 98, 96, 0.6) 0, transparent 140px) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover {
+                              --itemIconColor: #F8F4F1
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover i:not(.pro-gallery-loved):not(.info-element-loved),
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover button:not(.pro-gallery-loved):not(.info-element-loved):not(.info-element-custom-button-button),
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover a {
+                              color: rgb(248, 244, 241) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover svg .gallery-item-svg-foreground {
+                              fill: rgb(248, 244, 241) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .gallery-item-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .info-element-title {
+                              --itemFont: normal normal normal 22px/1.4em raleway, sans-serif;
+                              --itemFontColor: #F8F4F1;
+                              color: rgb(248, 244, 241);
+                              font: normal normal normal 22px/1.4em raleway, sans-serif;
+                              text-decoration:
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .gallery-item-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .info-element-description {
+                              --itemDescriptionFont: normal normal normal 15px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              --itemDescriptionFontColor: #F8F4F1;
+                              color: rgb(248, 244, 241) !important;
+                              font: normal normal normal 15px/18px avenir-lt-w01_35-light1475496, avenir-lt-w05_35-light, sans-serif;
+                              text-decoration:
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .custom-button-wrapper,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .info-element-custom-button-wrapper {
+                              --customButtonFontColor: #F8F4F1;
+                              color: rgb(248, 244, 241) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-wrapper .gallery-item-hover .info-element-custom-button-wrapper button {
+                              --customButtonColor: #301D10;
+                              --customButtonBorderRadius: 0;
+                              --customButtonBorderWidth: 1;
+                              --customButtonBorderColor: #F8F4F1;
+                              --customButtonFont: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              color: rgb(248, 244, 241) !important;
+                              font: normal normal normal 15px/18px din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              text-decoration: ;
+                              background: rgba(248, 244, 241, 0) !important;
+                              border-width: 1px;
+                              border-radius: 0px;
+                              border-color: rgb(248, 244, 241)
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container:not(.invert-hover) .gallery-item-hover:before {
+                              --itemOpacity: #301D10;
+                              background: rgba(99, 98, 96, 0.6) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container:not(.invert-hover) .gallery-item-hover.default.force-hover:before,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container:not(.invert-hover):hover .gallery-item-hover.default:not(.hide-hover):before {
+                              background: #301D10 !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.invert-hover .gallery-item-hover:before {
+                              --itemOpacity: #301D10;
+                              background: rgba(99, 98, 96, 0.6) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.invert-hover .gallery-item-hover.default.force-hover:before,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.invert-hover:hover .gallery-item-hover.default:not(.hide-hover):before {
+                              background: #301D10 !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-bottom-info .gallery-item-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-bottom-info .info-element-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-top-info .gallery-item-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-top-info .info-element-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-left-info .gallery-item-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-left-info .info-element-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-right-info .gallery-item-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-right-info .info-element-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .gallery-item-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .info-element-title {
+                              --itemFontSlideshow: normal normal normal 22px/1.4em raleway, sans-serif;
+                              --itemFontColorSlideshow: #301D10;
+                              color: rgb(48, 29, 16) !important;
+                              font: normal normal normal 22px/27px avenir-lt-w01_85-heavy1475544, avenir-lt-w05_85-heavy, sans-serif !important;
+                              text-decoration:
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-bottom-info .gallery-item-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-bottom-info .info-element-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-top-info .gallery-item-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-top-info .info-element-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-left-info .gallery-item-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-left-info .info-element-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-right-info .gallery-item-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-right-info .info-element-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .gallery-item-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .info-element-description {
+                              --itemDescriptionFontColorSlideshow: #301D10;
+                              --itemDescriptionFontSlideshow: normal normal normal 15px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              color: rgb(48, 29, 16) !important;
+                              font: normal normal normal 15px/18px avenir-lt-w01_35-light1475496, avenir-lt-w05_35-light, sans-serif !important;
+                              text-decoration:
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-text .custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-text .info-element-custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-bottom-info .custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-bottom-info .info-element-custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-top-info .custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-top-info .info-element-custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-left-info .custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-left-info .info-element-custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-right-info .custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-item-right-info .info-element-custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container .gallery-slideshow-info .info-element-custom-button-wrapper button {
+                              --customButtonFontForHover: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              --customButtonFontColorForHover: #301D10;
+                              --externalCustomButtonBorderWidth: 0;
+                              --externalCustomButtonBorderRadius: 0;
+                              font: normal normal normal 15px/18px din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              text-decoration: ;
+                              color: rgb(48, 29, 16) !important;
+                              background: rgba(163, 74, 33, 0) !important;
+                              border-color: rgb(48, 29, 16);
+                              border-width: 0px;
+                              border-radius: 0px
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item.load-with-color:not(.image-loaded) {
+                              --imageLoadingColor: #C6C3C1;
+                              background-color: rgb(198, 195, 193)
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item.gallery-item-video i.gallery-item-video-play-triangle {
+                              --itemFontColor: #F8F4F1;
+                              color: rgb(248, 244, 241)
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item.gallery-item-video i.gallery-item-video-play-background {
+                              --itemOpacity: #301D10;
+                              color: rgba(99, 98, 96, 0.6) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info svg .gallery-item-svg-background,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover svg .gallery-item-svg-background {
+                              --itemOpacity: #301D10;
+                              fill: rgba(99, 98, 96, 0.6) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info .gradient-top,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .gradient-top {
+                              --itemOpacity: #301D10;
+                              background: linear-gradient(rgba(99, 98, 96, 0.6) 0, transparent 140px) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info {
+                              --itemIconColorSlideshow: #301D10
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info i:not(.pro-gallery-loved):not(.info-element-loved),
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info button:not(.pro-gallery-loved):not(.info-element-loved):not(.info-element-custom-button-button):not(.artstore-add-to-cart-button),
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info a {
+                              color: rgb(48, 29, 16) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info svg .gallery-item-svg-foreground {
+                              fill: rgb(48, 29, 16) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info .gallery-item-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info .info-element-title {
+                              --itemFontSlideshow: normal normal normal 22px/1.4em raleway, sans-serif;
+                              --itemFontColorSlideshow: #301D10;
+                              color: rgb(48, 29, 16) !important;
+                              font: normal normal normal 22px/27px avenir-lt-w01_85-heavy1475544, avenir-lt-w05_85-heavy, sans-serif !important;
+                              text-decoration:
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info .gallery-item-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-slideshow-info .info-element-description {
+                              --itemDescriptionFontSlideshow: normal normal normal 15px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              --itemDescriptionFontColorSlideshow: #301D10;
+                              color: rgb(48, 29, 16) !important;
+                              font: normal normal normal 15px/18px avenir-lt-w01_35-light1475496, avenir-lt-w05_35-light, sans-serif !important;
+                              text-decoration:
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover {
+                              --itemIconColor: #F8F4F1
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover i:not(.pro-gallery-loved):not(.info-element-loved),
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover button:not(.pro-gallery-loved):not(.info-element-loved):not(.info-element-custom-button-button),
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover a {
+                              color: rgb(248, 244, 241) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover svg .gallery-item-svg-foreground {
+                              fill: rgb(248, 244, 241) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .gallery-item-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .info-element-title {
+                              --itemFont: normal normal normal 22px/1.4em raleway, sans-serif;
+                              --itemFontColor: #F8F4F1;
+                              color: rgb(248, 244, 241);
+                              font: normal normal normal 22px/1.4em raleway, sans-serif;
+                              text-decoration:
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .gallery-item-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .info-element-description {
+                              --itemDescriptionFont: normal normal normal 15px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              --itemDescriptionFontColor: #F8F4F1;
+                              color: rgb(248, 244, 241) !important;
+                              font: normal normal normal 15px/18px avenir-lt-w01_35-light1475496, avenir-lt-w05_35-light, sans-serif;
+                              text-decoration:
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .custom-button-wrapper,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .info-element-custom-button-wrapper {
+                              --customButtonFontColor: #F8F4F1;
+                              color: rgb(248, 244, 241) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-wrapper .gallery-item-hover .info-element-custom-button-wrapper button {
+                              --customButtonColor: #301D10;
+                              --customButtonBorderRadius: 0;
+                              --customButtonBorderWidth: 1;
+                              --customButtonBorderColor: #F8F4F1;
+                              --customButtonFont: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              color: rgb(248, 244, 241) !important;
+                              font: normal normal normal 15px/18px din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              text-decoration: ;
+                              background: rgba(248, 244, 241, 0) !important;
+                              border-width: undefinedpx;
+                              border-radius: undefinedpx;
+                              border-color: rgb(248, 244, 241)
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator:not(.invert-hover) .gallery-item-hover:not(.hide-hover):before {
+                              --itemOpacity: #301D10;
+                              background: rgba(99, 98, 96, 0.6) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator:not(.invert-hover) .gallery-item-hover.default.force-hover:before,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator:not(.invert-hover):hover .gallery-item-hover.default:not(.hide-hover):before {
+                              background: #301D10 !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator.invert-hover .gallery-item-hover:before {
+                              --itemOpacity: #301D10;
+                              background: rgba(99, 98, 96, 0.6) !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator.invert-hover .gallery-item-hover.default.force-hover:before,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator.invert-hover:hover .gallery-item-hover.default:not(.hide-hover):before {
+                              background: #301D10 !important
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-bottom-info .gallery-item-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-bottom-info .info-element-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-top-info .gallery-item-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-top-info .info-element-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-left-info .gallery-item-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-left-info .info-element-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-right-info .gallery-item-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-right-info .info-element-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-slideshow-info .gallery-item-title,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-slideshow-info .info-element-title {
+                              --itemFontSlideshow: normal normal normal 22px/1.4em raleway, sans-serif;
+                              --itemFontColorSlideshow: #301D10;
+                              color: rgb(48, 29, 16) !important;
+                              font: normal normal normal 22px/27px avenir-lt-w01_85-heavy1475544, avenir-lt-w05_85-heavy, sans-serif !important;
+                              text-decoration:
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-bottom-info .gallery-item-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-bottom-info .info-element-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-top-info .gallery-item-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-top-info .info-element-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-left-info .gallery-item-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-left-info .info-element-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-right-info .gallery-item-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-right-info .info-element-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-slideshow-info .gallery-item-description,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-slideshow-info .info-element-description {
+                              --itemDescriptionFontColorSlideshow: #301D10;
+                              --itemDescriptionFontSlideshow: normal normal normal 15px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              color: rgb(48, 29, 16) !important;
+                              font: normal normal normal 15px/18px avenir-lt-w01_35-light1475496, avenir-lt-w05_35-light, sans-serif !important;
+                              text-decoration:
+                            }
+
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-text .custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-text .info-element-custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-bottom-info .custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-bottom-info .info-element-custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-top-info .custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-top-info .info-element-custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-left-info .custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-left-info .info-element-custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-right-info .custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-item-right-info .info-element-custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-slideshow-info .custom-button-wrapper button,
+                            .comp-l8bfrp0m .pro-gallery.inline-styles .gallery-item-container.pro-gallery-mobile-indicator .gallery-slideshow-info .info-element-custom-button-wrapper button {
+                              --customButtonFontForHover: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              --customButtonFontColorForHover: #301D10;
+                              --externalCustomButtonBorderWidth: 0;
+                              --externalCustomButtonBorderRadius: 0;
+                              font: normal normal normal 15px/18px din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              text-decoration: ;
+                              color: rgb(48, 29, 16) !important;
+                              background: rgba(163, 74, 33, 0) !important;
+                              border-color: rgb(48, 29, 16);
+                              border-width: undefinedpx;
+                              border-radius: undefinedpx
+                            }
+
+                            .comp-l8bfrp0m .te-pro-gallery-text-item {
+                              font: normal normal normal 13px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              color: #F8F4F1
+                            }
+
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper .pro-fullscreen-text-item {
+                              --fullscreen-text-item-bg: #301D10;
+                              background-color: #301D10
+                            }
+
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles {
+                              --bgColorExpand: #F8F4F1;
+                              background-color: rgb(248, 244, 241)
+                            }
+
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .pro-fullscreen-selected-license,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .pro-fullscreen-checkout-link {
+                              --descriptionColorExpand: #301D10;
+                              --descriptionFontExpand: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              color: rgb(48, 29, 16);
+                              font: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              text-decoration:
+                            }
+
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-bottom-mobile-info {
+                              --bgColorExpand: #F8F4F1;
+                              background-color: rgb(248, 244, 241)
+                            }
+
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-title {
+                              --titleColorExpand: #301D10;
+                              --titleFontExpand: normal normal normal 22px/1.4em raleway, sans-serif;
+                              color: rgb(48, 29, 16);
+                              font: normal normal bold 36px/1.4em raleway, sans-serif;
+                              text-decoration:
+                            }
+
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-description,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-description .fullscreen-side-bar-description-line,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-exif,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-link,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-bottom-link {
+                              --descriptionColorExpand: #301D10;
+                              --descriptionFontExpand: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              color: rgb(48, 29, 16);
+                              font: normal normal normal 14px/1.4em din-next-w01-light, din-next-w02-light, din-next-w10-light, sans-serif;
+                              text-decoration:
+                            }
+
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-description:after,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-description .fullscreen-side-bar-description-line:after,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-exif:after,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-link:after,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-bottom-link:after {
+                              --descriptionColorExpand: #301D10;
+                              border-color: rgb(48, 29, 16)
+                            }
+
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-social i:not(.pro-gallery-loved),
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-social a,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-side-bar-social button,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-nav i:not(.pro-gallery-loved),
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-nav a,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-nav button,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-mobile-bar i:not(.pro-gallery-loved),
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-mobile-bar a,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-mobile-bar button,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-social i:not(.pro-gallery-loved),
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-social a,
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-social button {
+                              --descriptionColorExpand: #301D10;
+                              color: rgb(48, 29, 16)
+                            }
+
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles i.fullscreen-item-video-play.progallery-svg-font-icons-play-triangle {
+                              --descriptionColorExpand: #301D10;
+                              color: rgb(48, 29, 16)
+                            }
+
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles i.fullscreen-item-video-play.progallery-svg-font-icons-play-background {
+                              --bgColorExpand: #F8F4F1;
+                              color: rgb(248, 244, 241)
+                            }
+
+                            .comp-l8bfrp0m .pro-fullscreen-wrapper #fullscreen-view.fullscreen-bright.pro-fullscreen-inline-styles .fullscreen-icon {
+                              --descriptionColorExpand: #301D10;
+                              --bgColorExpand: #F8F4F1;
+                              color: rgb(48, 29, 16);
+                              background: rgb(248, 244, 241)
+                            }
+                          </style>
+                          
 <div id="gallery-wrapper-comp-l8bfrp0m" style="overflow:hidden;height:100%;width:100%">
   <style>
     div.comp-l8bfrp0m:not(.fullscreen-comp-wrapper) {
@@ -3052,134 +3136,64 @@ font-display: block;
               <div data-hook="gallery-column" id="gallery-horizontal-scroll-comp-l8bfrp0m"
                 class="gallery-horizontal-scroll gallery-column hide-scrollbars  ltr   scroll-snap  "
                 style="width:1226px;height:469px;overflow-y:hidden">
-                <div class="gallery-horizontal-scroll-inner">
-                  <div data-hook="group-view" style="--group-top:0px;--group-left:0px;--group-width:706px;--group-right:auto"
-                    aria-hidden="false">
-                    <div data-id="97242efc-d000-4a14-80f9-d4ad609def95" class="item-link-wrapper" data-idx="0"
-                      data-hook="item-link-wrapper" tabindex="-1">
-                      <div class="gallery-item-container item-container-regular has-custom-focus visible clickable"
-                        id="pgi97242efcd0004a1480f9d4ad609def95_0" tabindex="0" aria-label="DeHemelseBloem_P22404_Still04.jpg"
-                        data-hash="97242efc-d000-4a14-80f9-d4ad609def95" data-id="97242efc-d000-4a14-80f9-d4ad609def95"
-                        data-idx="0" role="button" data-hook="item-container"
-                        style="overflow-y:hidden;position:absolute;bottom:auto;margin:5px;cursor:;top:0;left:0;right:auto;width:696px;height:464px;overflow:hidden;transition:opacity .2s ease;opacity:1;display:block">
-                        <div>
-                          <div data-hook="item-wrapper" class="gallery-item-wrapper visible [object Object]"
-                            id="item-wrapper-97242efc-d000-4a14-80f9-d4ad609def95"
-                            style="background-color:inherit;height:464px;width:696px;margin:0px">
-                            <div
-                              class="gallery-item-content item-content-regular image-item gallery-item-visible gallery-item gallery-item-preloaded  load-with-color  "
-                              data-hook="image-item" style="width:696px;height:464px;margin-top:0;margin-left:0"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div data-hook="group-view"
-                    style="--group-top:0px;--group-left:706px;--group-width:706px;--group-right:auto" aria-hidden="false">
-                    <div data-id="007534ba-a1ae-4949-a4d4-3deadce718f3" class="item-link-wrapper" data-idx="1"
-                      data-hook="item-link-wrapper" tabindex="-1">
-                      <div class="gallery-item-container item-container-regular has-custom-focus visible clickable"
-                        id="pgi007534baa1ae4949a4d43deadce718f3_1" tabindex="-1"
-                        aria-label="DeHemelseBloem_P22404_Still01.jpg" data-hash="007534ba-a1ae-4949-a4d4-3deadce718f3"
-                        data-id="007534ba-a1ae-4949-a4d4-3deadce718f3" data-idx="1" role="button" data-hook="item-container"
-                        style="overflow-y:hidden;position:absolute;bottom:auto;margin:5px;cursor:;top:0;left:706px;right:auto;width:696px;height:464px;overflow:hidden;transition:opacity .2s ease;opacity:1;display:block">
-                        <div>
-                          <div data-hook="item-wrapper" class="gallery-item-wrapper visible [object Object]"
-                            id="item-wrapper-007534ba-a1ae-4949-a4d4-3deadce718f3"
-                            style="background-color:inherit;height:464px;width:696px;margin:0px">
-                            <div
-                              class="gallery-item-content item-content-regular image-item gallery-item-visible gallery-item gallery-item-preloaded  load-with-color  "
-                              data-hook="image-item" style="width:696px;height:464px;margin-top:0;margin-left:0">></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div data-hook="group-view"
-                    style="--group-top:0px;--group-left:1412px;--group-width:706px;--group-right:auto" aria-hidden="false">
-                    <div data-id="8d8320c5-8493-49bf-81b8-b9ee2b9c37e5" class="item-link-wrapper" data-idx="2"
-                      data-hook="item-link-wrapper" tabindex="-1">
-                      <div class="gallery-item-container item-container-regular has-custom-focus visible clickable"
-                        id="pgi8d8320c5849349bf81b8b9ee2b9c37e5_2" tabindex="-1"
-                        aria-label="DeHemelseBloem_P22404_Still03.jpg" data-hash="8d8320c5-8493-49bf-81b8-b9ee2b9c37e5"
-                        data-id="8d8320c5-8493-49bf-81b8-b9ee2b9c37e5" data-idx="2" role="button" data-hook="item-container"
-                        style="overflow-y:hidden;position:absolute;bottom:auto;margin:5px;cursor:;top:0;left:1412px;right:auto;width:696px;height:464px;overflow:hidden;transition:opacity .2s ease;opacity:1;display:block">
-                        <div>
-                          <div data-hook="item-wrapper" class="gallery-item-wrapper visible [object Object]"
-                            id="item-wrapper-8d8320c5-8493-49bf-81b8-b9ee2b9c37e5"
-                            style="background-color:inherit;height:464px;width:696px;margin:0px">
-                            <div
-                              class="gallery-item-content item-content-regular image-item gallery-item-visible gallery-item gallery-item-preloaded  load-with-color  "
-                              data-hook="image-item" style="width:696px;height:464px;margin-top:0;margin-left:0"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div data-hook="group-view"
-                    style="--group-top:0px;--group-left:2118px;--group-width:706px;--group-right:auto" aria-hidden="false">
-                    <div data-id="98c03ecb-3fe6-4be4-99f7-d70c050d3cf3" class="item-link-wrapper" data-idx="3"
-                      data-hook="item-link-wrapper" tabindex="-1">
-                      <div class="gallery-item-container item-container-regular has-custom-focus visible clickable"
-                        id="pgi98c03ecb3fe64be499f7d70c050d3cf3_3" tabindex="-1"
-                        aria-label="DeHemelseBloem_P22404_Still05.jpg" data-hash="98c03ecb-3fe6-4be4-99f7-d70c050d3cf3"
-                        data-id="98c03ecb-3fe6-4be4-99f7-d70c050d3cf3" data-idx="3" role="button" data-hook="item-container"
-                        style="overflow-y:hidden;position:absolute;bottom:auto;margin:5px;cursor:;top:0;left:2118px;right:auto;width:696px;height:464px;overflow:hidden;transition:opacity .2s ease;opacity:1;display:block">
-                        <div>
-                          <div data-hook="item-wrapper" class="gallery-item-wrapper visible [object Object]"
-                            id="item-wrapper-98c03ecb-3fe6-4be4-99f7-d70c050d3cf3"
-                            style="background-color:inherit;height:464px;width:696px;margin:0px">
-                            <div
-                              class="gallery-item-content item-content-regular image-item gallery-item-visible gallery-item gallery-item-preloaded  load-with-color  "
-                              data-hook="image-item" style="width:696px;height:464px;margin-top:0;margin-left:0"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div data-hook="group-view"
-                    style="--group-top:0px;--group-left:2824px;--group-width:706px;--group-right:auto" aria-hidden="false">
-                    <div data-id="3488cbdc-6ca1-44ef-b268-9f4051757ccc" class="item-link-wrapper" data-idx="4"
-                      data-hook="item-link-wrapper" tabindex="-1">
-                      <div class="gallery-item-container item-container-regular has-custom-focus visible clickable"
-                        id="pgi3488cbdc6ca144efb2689f4051757ccc_4" tabindex="-1"
-                        aria-label="DeHemelseBloem_P22404_Still02.jpg" data-hash="3488cbdc-6ca1-44ef-b268-9f4051757ccc"
-                        data-id="3488cbdc-6ca1-44ef-b268-9f4051757ccc" data-idx="4" role="button" data-hook="item-container"
-                        style="overflow-y:hidden;position:absolute;bottom:auto;margin:5px;cursor:;top:0;left:2824px;right:auto;width:696px;height:464px;overflow:hidden;transition:opacity .2s ease;opacity:1;display:block">
-                        <div>
-                          <div data-hook="item-wrapper" class="gallery-item-wrapper visible [object Object]"
-                            id="item-wrapper-3488cbdc-6ca1-44ef-b268-9f4051757ccc"
-                            style="background-color:inherit;height:464px;width:696px;margin:0px">
-                            <div
-                              class="gallery-item-content item-content-regular image-item gallery-item-visible gallery-item gallery-item-preloaded  load-with-color  "
-                              data-hook="image-item" style="width:696px;height:464px;margin-top:0;margin-left:0"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div><button class="nav-arrows-container drop-shadow  " aria-label="Next Item" tabindex="0"
-                data-hook="nav-arrow-next" style="width:23px;height:39px;padding:0;top:calc(50% + 2.5px - 19.5px - 
-        0px);right:28px"><svg class="slideshow-arrow" style="transform:scaleX(1) scale(1);fill:" width="23" height="39" viewBox="0 0 23 39"><path d="M857.005,231.479L858.5,230l18.124,18-18.127,18-1.49-1.48L873.638,248Z" transform="translate(-855 -230)"></path></svg></button></div></div><div data-key="items-styles" style="display:none"></div></div></div></div></div></div><div id="comp-l8cvqnbg" class="KcpHeO tz5f0K comp-l8cvqnbg spixui-rich-text" data-testid="richTextElement"><h2 class="font_2" style="font-size:30px; line-height:normal;"><span style="font-family:anton,sans-serif;"><span class="color_15"><span style="letter-spacing:0.01em;"><span style="font-size:30px;">UPCOMING SCREENINGS</span></span></span></span></h2></div><div id="comp-l8cvnpjf" class="KcpHeO tz5f0K comp-l8cvnpjf spixui-rich-text" data-testid="richTextElement"><p class="font_2" style="font-size:16px; line-height:1.3em; text-align:center;"><a href="https://www.filmacademie.ahk.nl/actueel/keep-an-eye-filmacademie-festival/programma-bachelor/bachelor-2022/openbare-vertoningen-1/blok-d/" target="_blank" rel="noreferrer noopener"><span style="color:#000000;"><span style="text-decoration:underline;"><span style="font-family:helvetica-w01-bold,helvetica-w02-bold,helvetica-lt-w10-bold,sans-serif;">KEEP AN EYE FILMFESTIVAL:</span></span></span></a></p>
-        
-        <p class="font_2" style="font-size:16px; line-height:1.3em; text-align:center;"><span style="font-style:italic;"><span class="color_15"><span style="letter-spacing:0.01em;"><span style="font-size:16px;"><span style="font-family:helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;">Thursday, October </span></span></span></span><span class="color_15"><span style="letter-spacing:0.01em;"><span style="font-size:16px;"><span style="font-family:helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;">6</span></span></span></span></span><span class="color_15"><span style="letter-spacing:0.01em;"><span style="font-size:16px;"><span style="font-family:helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;">:</span></span></span></span></p>
 
-        <p class="font_2" style="font-size:16px; line-height:1.3em; text-align:center;"><span class="color_15"><span style="letter-spacing:0.01em;"><span style="font-size:16px;"><span style="font-family:helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;">12:45 - 14:30, Eye Cinema 1<br />
-        <span style="font-style:italic;">Thursday October 6 to Wednesday October 12</span>:&nbsp;</span></span></span></span></p>
+                <div class="glider-contain">
+                  <div class="glider">
+                      <div><wow-image id="img_compi1"
+                        data-bg-effect-name="" data-has-ssr-src=""><img
+                          src="images/De Hemelse Bloem Stills (2).jpg"
+                          alt="De Hemelse Bloem Stills (2).jpg" style="height:357px;object-fit:cover"
+                        type="images/webp" /></wow-image></div>
+                      <div><wow-image id="img_compi2"
+                        data-bg-effect-name="" data-has-ssr-src=""><img
+                          src="images/De Hemelse Bloem Stills (3).jpg"
+                          alt="De Hemelse Bloem Stills (3).jpg" style="height:357px;object-fit:cover"
+                        type="images/webp" /></wow-image></div>
+                      <div><wow-image id="img_compi3"
+                        data-bg-effect-name="" data-has-ssr-src=""><img
+                          src="images/De Hemelse Bloem Stills (4).jpg"
+                          alt="De Hemelse Bloem Stills (4).jpg"  style="height:357px;object-fit:cover"
+                        type="images/webp" /></wow-image></div>
+                      <div><wow-image id="img_compi4"
+                        data-bg-effect-name="" data-has-ssr-src=""><img
+                          src="images/De Hemelse Bloem Stills (7).jpg"
+                          alt="De Hemelse Bloem Stills (7).jpg"  style="height:357px;object-fit:cover"
+                        type="images/webp" /></wow-image></div>
+                      <div><wow-image id="img_compi5"
+                        data-bg-effect-name="" data-has-ssr-src=""><img
+                          src="images/De Hemelse Bloem Stills (8).jpg"
+                          alt="De Hemelse Bloem Stills (8).jpg"  style="height:357px;object-fit:cover"
+                        type="images/webp" /></wow-image></div>
+                      <div><wow-image id="img_compi6"
+                        data-bg-effect-name="" data-has-ssr-src=""><img
+                          src="images/De Hemelse Bloem Stills (10).jpg"
+                          alt="De Hemelse Bloem Stills (10).jpg" style="height:357px;object-fit:cover"
+                        type="images/webp" /></wow-image></div>
+                  </div>
+                  <button class="glider-prev">&laquo;</button>
+                  <button class="glider-next">&raquo;</button>
+                  <div role="tablist" id="dots"></div>
+              </div>
 
-        <p class="font_2" style="font-size:16px; line-height:1.3em; text-align:center;"><span class="color_15"><span style="letter-spacing:0.01em;"><span style="font-size:16px;"><span style="font-family:helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;">online on Picl.<br />
-        <span style="font-style:italic;">Friday October 7</span>:&nbsp;</span></span></span></span></p>
+        </div></div></div>
+        <div></div>
+      </div></div></div></div></div>
+        <div id="comp-l8cvqnbg">
+          <h3 class="font_2" style="font-size:30px">
+            <span style="font-family:anton;"><span class="color_15"><span style="letter-spacing:0.05em;">
+                OFFICIAL SELECTIONS AND SCREENINGS
+            </span></span></span></h3></div><div id="comp-l8cvnpjf" class="KcpHeO tz5f0K comp-l8cvnpjf spixui-rich-text" data-testid="richTextElement">
 
-        <p class="font_2" style="font-size:16px; line-height:1.3em; text-align:center;"><span class="color_15"><span style="letter-spacing:0.01em;"><span style="font-size:16px;"><span style="font-family:helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;">17:30 - 19:00, Hoogt (Utrecht)<br />
-        <span style="font-style:italic;">Saturday October 8:</span><br />
-        12:30 - 14:00, Eye Cinema 1</span></span></span></span></p>
+        <p class="font_2" style="font-size:16px; line-height:1.3em; text-align:center;"><span class="color_15"><span style="letter-spacing:0.01em;">
+        <span style="font-style:italic;">Cinedans International Dance Film Festival Amsterdam, 2023</span>&nbsp;</span></span></span></span></p></br></br>
 
-        <p class="font_2" style="font-size:16px; line-height:1.3em; text-align:center;"><span class="color_15"><span style="letter-spacing:0.01em;"><span style="font-size:16px;"><span style="font-family:helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;"><span style="font-style:italic;">Saturday October 8:</span><br />
-        <span style="text-decoration:underline;"><a href="https://www.lux-nijmegen.nl/film/keep-an-eye-filmacademie-blok-1-mijn-lichaam-mijn-schaamte/" target="_blank" rel="noreferrer noopener">LUX 6 16:15, Nijmegen</a></span><br />
-        <span style="font-style:italic;">Sunday 9 October</span> </span></span></span></span></p>
+        <p class="font_2" style="font-size:16px; line-height:1.3em; text-align:center;"><span class="color_15"><span style="letter-spacing:0.01em;">
+        <span style="font-style:italic;">In The Palace International Short Film Festival Sofia, 2023</span>&nbsp;</span></span></span></span></p></br></br>
 
-        <p class="font_2" style="font-size:16px; line-height:1.3em; text-align:center;"><span class="color_15"><span style="letter-spacing:0.01em;"><span style="font-size:16px;"><span style="font-family:helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;">16:30 - 18:00, Eye Cinema 1 (including English subtitles)</span></span></span></span></p></div><div id="comp-l8bgftn1" class="KcpHeO tz5f0K comp-l8bgftn1 spixui-rich-text" data-testid="richTextElement"><p class="font_2" style="font-size:16px; line-height:1.3em;"><span style="font-weight:normal;"><span class="color_15"><span style="letter-spacing:0.01em;"><span style="font-size:16px;">
+        <p class="font_2" style="font-size:16px; line-height:1.3em; text-align:center;"><span class="color_15"><span style="letter-spacing:0.01em;">
+        <span style="font-style:italic;">Choreoscope Dance Film Festival Barcelona, 2023</span><br /></span></span></span></span></p>
+
+        </div><div id="comp-l8bgftn1" class="KcpHeO tz5f0K comp-l8bgftn1 spixui-rich-text" data-testid="richTextElement"><p class="font_2" style="font-size:16px; line-height:1em;"><span style="font-weight:normal;"><span class="color_15"><span style="letter-spacing:0.01em;"><span style="font-size:16px;">
           
         <p class="font_2" style="font-size:16px; line-height:1.3em;"><span style="font-family:helvetica-w01-bold,helvetica-w02-bold,helvetica-lt-w10-bold,sans-serif;"><span class="color_15"><span style="letter-spacing:0.01em;"><span style="font-size:16px;">Director </span></span></span></span><span style="font-weight:normal;"><span class="color_15"><span><span style="font-size:16px;"><span style="font-family:helvetica-w01-roman,helvetica-w02-roman,helvetica-lt-w10-roman,sans-serif;">Tessa van der Riet&nbsp;</span><br />
 
