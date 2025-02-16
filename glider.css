@@ -11,6 +11,25 @@
   -ms-overflow-style: none;
   transform: translateZ(0);
 }
+iframe {
+  width: 100vw !important;
+  max-width: 100% !important;
+  height: 750px; /* Adjust as needed */
+  display: block;
+  border: none;
+}
+.video-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+
+.video-container iframe {
+  width: 100%;
+  max-width: 100%;
+}
+
 .glider-track {
   transform: translateZ(0);
   width: 100%;
