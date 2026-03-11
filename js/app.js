@@ -20,7 +20,6 @@ function initMobileMenu() {
     nav.classList.toggle('open');
   });
 
-  // Close menu when clicking a link
   nav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       toggle.classList.remove('active');
@@ -79,24 +78,20 @@ function initLightbox() {
 // --- Load Content from Firebase ---
 async function loadContent() {
   const pageType = document.body.dataset.page;
-  if (!pageType || typeof firebase === 'undefined') return;
+  if (!pageType || pageType === 'home' || pageType === 'contact') return;
+  if (typeof firebase === 'undefined') return;
 
   // Check if Firebase is configured
   try {
     const app = firebase.app();
-    if (app.options.apiKey === 'YOUR_API_KEY') {
-      showFallbackContent(pageType);
-      return;
-    }
+    if (app.options.apiKey === 'YOUR_API_KEY') return;
   } catch (e) {
-    showFallbackContent(pageType);
     return;
   }
 
   const grid = document.getElementById('content-grid');
+  const fallback = document.getElementById('fallback-content');
   if (!grid) return;
-
-  grid.innerHTML = '<div class="loading-spinner"></div>';
 
   try {
     const snapshot = await db.collection('projects')
@@ -105,31 +100,22 @@ async function loadContent() {
       .orderBy('order', 'asc')
       .get();
 
-    if (snapshot.empty) {
-      grid.innerHTML = '<div class="empty-state">No projects yet. Check back soon!</div>';
-      return;
+    // If Firebase has projects, show them instead of fallback
+    if (!snapshot.empty) {
+      if (fallback) fallback.style.display = 'none';
+      grid.innerHTML = '';
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const card = createProjectCard(doc.id, data, pageType);
+        grid.appendChild(card);
+      });
+    } else {
+      // No projects in Firebase — keep showing the fallback content
+      grid.style.display = 'none';
     }
-
-    grid.innerHTML = '';
-    snapshot.forEach(doc => {
-      const data = doc.data();
-      const card = createProjectCard(doc.id, data, pageType);
-      grid.appendChild(card);
-    });
   } catch (error) {
     console.error('Error loading content:', error);
-    showFallbackContent(pageType);
-  }
-}
-
-// --- Show fallback content (before Firebase is set up) ---
-function showFallbackContent(pageType) {
-  const grid = document.getElementById('content-grid');
-  if (!grid) return;
-
-  const fallback = document.getElementById('fallback-content');
-  if (fallback) {
-    fallback.style.display = '';
+    // On error, just keep showing fallback
     grid.style.display = 'none';
   }
 }
@@ -140,8 +126,17 @@ function createProjectCard(id, data, pageType) {
 
   if (pageType === 'photography') {
     card.className = 'photo-item';
-    card.setAttribute('data-lightbox', data.imageUrl || '');
-    card.innerHTML = `<img src="${data.imageUrl || ''}" alt="${data.title || ''}" loading="lazy">`;
+    card.setAttribute('data-lightbox', data.thumbnailUrl || '');
+    card.innerHTML = `<img src="${data.thumbnailUrl || ''}" alt="${data.title || ''}" loading="lazy">`;
+    // Re-init lightbox for dynamically added items
+    card.addEventListener('click', () => {
+      const lightbox = document.getElementById('lightbox');
+      if (lightbox) {
+        lightbox.querySelector('img').src = data.thumbnailUrl || '';
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    });
   } else {
     card.className = 'project-card';
     card.innerHTML = `
@@ -151,48 +146,16 @@ function createProjectCard(id, data, pageType) {
         <div class="card-subtitle">${data.subtitle || ''}</div>
       </div>
     `;
-    if (data.link) {
-      card.style.cursor = 'pointer';
-      card.addEventListener('click', () => {
+    // Click to open detail page or external link
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => {
+      if (data.link) {
         window.location.href = data.link;
-      });
-    }
+      } else {
+        window.location.href = `project.html?id=${id}`;
+      }
+    });
   }
 
   return card;
-}
-
-// --- Detail Page: Load single project ---
-async function loadProjectDetail(projectId) {
-  if (typeof firebase === 'undefined') return;
-
-  try {
-    const doc = await db.collection('projects').doc(projectId).get();
-    if (!doc.exists) return;
-
-    const data = doc.data();
-    const container = document.getElementById('project-detail');
-    if (!container) return;
-
-    // Populate detail fields
-    const titleEl = container.querySelector('.detail-title');
-    const descEl = container.querySelector('.detail-description');
-    const videoEl = container.querySelector('.detail-video');
-    const galleryEl = container.querySelector('.detail-gallery');
-
-    if (titleEl) titleEl.textContent = data.title || '';
-    if (descEl) descEl.textContent = data.description || '';
-
-    if (videoEl && data.vimeoUrl) {
-      videoEl.innerHTML = `<iframe src="${data.vimeoUrl}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
-    }
-
-    if (galleryEl && data.galleryImages) {
-      galleryEl.innerHTML = data.galleryImages.map(url =>
-        `<img src="${url}" alt="${data.title}" loading="lazy">`
-      ).join('');
-    }
-  } catch (error) {
-    console.error('Error loading project:', error);
-  }
 }
