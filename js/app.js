@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initActiveNav();
   initLightbox();
   loadContent();
+  loadPageContent();
 });
 
 // --- Mobile Menu ---
@@ -78,7 +79,7 @@ function initLightbox() {
 // --- Load Content from Firebase ---
 async function loadContent() {
   const pageType = document.body.dataset.page;
-  if (!pageType || pageType === 'home' || pageType === 'contact') return;
+  if (!pageType || pageType === 'home' || pageType === 'contact' || pageType === 'project') return;
   if (typeof firebase === 'undefined') return;
 
   // Check if Firebase is configured
@@ -159,4 +160,47 @@ function createProjectCard(id, data, pageType) {
   }
 
   return card;
+}
+
+// --- Load Page Content from Firebase ---
+async function loadPageContent() {
+  const pageType = document.body.dataset.page;
+  if (!pageType || pageType === 'home' || pageType === 'project') return;
+  if (typeof firebase === 'undefined') return;
+
+  try {
+    const app = firebase.app();
+    if (app.options.apiKey === 'YOUR_API_KEY') return;
+  } catch (e) {
+    return;
+  }
+
+  try {
+    const doc = await db.collection('pageContent').doc(pageType).get();
+    if (!doc.exists) return;
+    const data = doc.data();
+
+    if (pageType === 'contact') {
+      const bioEl = document.querySelector('.contact-bio');
+      if (bioEl && (data.bio || data.bio2)) {
+        let html = '';
+        if (data.bio) html += `<p>${data.bio}</p>`;
+        if (data.bio2) html += `<p>${data.bio2}</p>`;
+        if (data.email) html += `<div class="contact-info"><p><a href="mailto:${data.email}">${data.email}</a></p></div>`;
+        bioEl.innerHTML = html;
+      }
+    } else {
+      // Update page title and description for category pages
+      const titleEl = document.querySelector('.page-header h1');
+      if (titleEl && data.title) titleEl.textContent = data.title;
+
+      const descEl = document.getElementById('page-description');
+      if (descEl && data.description) {
+        descEl.textContent = data.description;
+        descEl.style.display = 'block';
+      }
+    }
+  } catch (error) {
+    // Silently fail — keep static content
+  }
 }

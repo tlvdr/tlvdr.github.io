@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seed Data — Admin</title>
+  <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+  <div class="admin-wrapper">
+    <header class="admin-header">
+      <h1>Seed Existing Content</h1>
+      <a href="/admin" class="btn btn-sm btn-outline" style="color:white;border-color:rgba(255,255,255,0.3);">Back to Admin</a>
+    </header>
+    <div class="admin-main">
+      <div class="edit-form" style="max-width:700px;">
+        <h2>Import Existing Projects</h2>
+        <p style="margin-bottom:24px; color:var(--color-subtle); font-size:14px;">
+          This will create all existing static projects in Firestore so they can be managed from the admin panel.
+          Run this <strong>once</strong>. If projects already exist, duplicates may be created.
+        </p>
+        <div id="status" style="margin-bottom:16px;"></div>
+        <button id="seed-btn" class="btn btn-primary">Seed All Projects</button>
+        <button id="seed-pages-btn" class="btn btn-secondary" style="margin-left:12px;">Seed Page Content</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="../js/firebase-config.js"></script>
+  <script>
+    const statusEl = document.getElementById('status');
+
+    // Check auth
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        statusEl.innerHTML = '<p style="color:#c0392b;">You must be logged in. <a href="/admin">Go to admin</a> and sign in first.</p>';
+        document.getElementById('seed-btn').disabled = true;
+        document.getElementById('seed-pages-btn').disabled = true;
+      }
+    });
+
+    const filmProjects = [
+      {
+        title: 'De Hemelse Bloem',
+        subtitle: 'Documentary | Digital | 27\'44 | DCP | 2022',
+        description: 'The Divine Flower explores how the current generation of young women can break free from (learned) patterns of guilt and shame surrounding body image and sexuality, and learn to put their own physical pleasure and self-image first.',
+        thumbnailUrl: '/images/DeHemelseBloem_Still01.webp',
+        link: '/dhb',
+        category: 'film',
+        order: 1,
+        published: true,
+        galleryImages: []
+      },
+      {
+        title: 'Grip',
+        subtitle: 'Documentary | Digital | 17\'\' | DCP | 2021',
+        description: 'Grip tells the story of three skateboarding (girl)friends who try to get a grip on their own path through reflective dialogues. Can they escape today\'s insecurities that come along with being a young woman?',
+        thumbnailUrl: '/images/grip.webp',
+        link: '/grip',
+        category: 'film',
+        order: 2,
+        published: true,
+        galleryImages: []
+      },
+      {
+        title: 'El Pajaro Enjaulado',
+        subtitle: 'Documentary | 16MM | 9\'25 | 2020',
+        description: 'Pajaro Enjaulado (Caged Bird) is an observing portrait about 17-year-old Anthony who tries to break through his struggle with his self-image, identity and heartbreak through dance.',
+        thumbnailUrl: '/images/pajaroEnjaulado.webp',
+        link: '/cami',
+        category: 'film',
+        order: 3,
+        published: true,
+        galleryImages: []
+      },
+      {
+        title: 'Between The Lines',
+        subtitle: 'Documentary | 16MM',
+        description: '',
+        thumbnailUrl: '/images/BetweenTheLines_Still.webp',
+        link: '/kdo-3',
+        category: 'film',
+        order: 4,
+        published: true,
+        galleryImages: []
+      }
+    ];
+
+    const commercialProjects = [
+      {
+        title: 'Jarritos',
+        subtitle: 'Commercial',
+        description: '',
+        thumbnailUrl: '/images/JARRITOS_Still.webp',
+        category: 'commercial',
+        order: 1,
+        published: true,
+        galleryImages: []
+      },
+      {
+        title: 'Corporate',
+        subtitle: 'Brand Content',
+        description: '',
+        thumbnailUrl: '/images/corporate1.webp',
+        category: 'commercial',
+        order: 2,
+        published: true,
+        galleryImages: []
+      },
+      {
+        title: 'Corporate',
+        subtitle: 'Brand Content',
+        description: '',
+        thumbnailUrl: '/images/corporate2.webp',
+        category: 'commercial',
+        order: 3,
+        published: true,
+        galleryImages: []
+      },
+      {
+        title: 'DNA Test',
+        subtitle: 'Commercial',
+        description: '',
+        thumbnailUrl: '/images/DNAtest.webp',
+        category: 'commercial',
+        order: 4,
+        published: true,
+        galleryImages: []
+      },
+      {
+        title: 'Paradiso',
+        subtitle: 'Event Coverage',
+        description: '',
+        thumbnailUrl: '/images/eventparadiso.webp',
+        category: 'commercial',
+        order: 5,
+        published: true,
+        galleryImages: []
+      },
+      {
+        title: 'Events',
+        subtitle: 'Event Photography',
+        description: '',
+        thumbnailUrl: '/images/event1.webp',
+        category: 'commercial',
+        order: 6,
+        published: true,
+        galleryImages: []
+      }
+    ];
+
+    const photographyProjects = [
+      { title: 'Portrait 1', thumbnailUrl: '/images/Portret_EleCrewFoto2.webp', category: 'photography', order: 1, published: true },
+      { title: 'Portrait 2', thumbnailUrl: '/images/Portret_Viet.webp', category: 'photography', order: 2, published: true },
+      { title: 'Grip Portrait', thumbnailUrl: '/images/Portret_grip.webp', category: 'photography', order: 3, published: true },
+      { title: 'Sagrada BCN', thumbnailUrl: '/images/Portret_sagradabcn.webp', category: 'photography', order: 4, published: true },
+      { title: 'Skater BCN', thumbnailUrl: '/images/Portret_skaterbcn.webp', category: 'photography', order: 5, published: true },
+      { title: 'WTP', thumbnailUrl: '/images/Portret_wtp.webp', category: 'photography', order: 6, published: true },
+      { title: 'Tessa Portrait', thumbnailUrl: '/images/SUPA8_PORTRET2.webp', category: 'photography', order: 7, published: true },
+      { title: 'Tomas Ponsteen', thumbnailUrl: '/images/TomasPonsteen.webp', category: 'photography', order: 8, published: true },
+      { title: 'Eye', thumbnailUrl: '/images/jonneoog.webp', category: 'photography', order: 9, published: true },
+      { title: 'Evanina', thumbnailUrl: '/images/evanina.webp', category: 'photography', order: 10, published: true },
+      { title: 'Keti Koti', thumbnailUrl: '/images/ketikoti.webp', category: 'photography', order: 11, published: true },
+      { title: 'Photography', thumbnailUrl: '/images/_29A8457_JPG.webp', category: 'photography', order: 12, published: true }
+    ];
+
+    const allProjects = [...filmProjects, ...commercialProjects, ...photographyProjects];
+
+    document.getElementById('seed-btn').addEventListener('click', async () => {
+      const btn = document.getElementById('seed-btn');
+      btn.disabled = true;
+      btn.textContent = 'Seeding...';
+      statusEl.innerHTML = '';
+
+      let count = 0;
+      for (const project of allProjects) {
+        try {
+          project.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+          project.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+          await db.collection('projects').add(project);
+          count++;
+          statusEl.innerHTML = `<p>Created ${count} / ${allProjects.length} projects...</p>`;
+        } catch (err) {
+          statusEl.innerHTML += `<p style="color:#c0392b;">Error creating "${project.title}": ${err.message}</p>`;
+        }
+      }
+
+      statusEl.innerHTML = `<p style="color:#1e8449;"><strong>Done! Created ${count} projects.</strong> You can now manage them in the <a href="/admin">admin panel</a>.</p>`;
+      btn.textContent = 'Done';
+    });
+
+    document.getElementById('seed-pages-btn').addEventListener('click', async () => {
+      const btn = document.getElementById('seed-pages-btn');
+      btn.disabled = true;
+      btn.textContent = 'Seeding...';
+
+      const pages = {
+        contact: {
+          title: 'Contact',
+          bio: 'Tessa van der Riet (Amsterdam, 1996) is a (documentary) director and photographer currently based in Barcelona.',
+          bio2: 'Within her work she focusses on identity and social structure, exploring the boundaries of ethnic and cultural stratification. She aims to connect people while maintaining aesthetics, and is drawn to issues around girls\' and women\'s emancipation.',
+          email: 'info@tessavanderriet.com',
+          portraitUrl: '/images/SUPA8_PORTRET2.webp'
+        },
+        film: {
+          title: 'Film',
+          description: ''
+        },
+        photography: {
+          title: 'Photography',
+          description: ''
+        },
+        commercial: {
+          title: 'Commercial',
+          description: ''
+        }
+      };
+
+      for (const [pageId, data] of Object.entries(pages)) {
+        try {
+          data.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
+          await db.collection('pageContent').doc(pageId).set(data);
+          statusEl.innerHTML += `<p style="color:#1e8449;">Seeded "${pageId}" page content.</p>`;
+        } catch (err) {
+          statusEl.innerHTML += `<p style="color:#c0392b;">Error seeding "${pageId}": ${err.message}</p>`;
+        }
+      }
+
+      btn.textContent = 'Done';
+      statusEl.innerHTML += `<p style="color:#1e8449;"><strong>Page content seeded!</strong></p>`;
+    });
+  </script>
+</body>
+</html>

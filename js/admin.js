@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAuth();
   initTabs();
   initForm();
+  initPageContent();
 });
 
 // ---- Auth ----
@@ -83,6 +84,7 @@ function showDashboard(user) {
   document.getElementById('admin-dashboard').style.display = 'flex';
   document.getElementById('admin-email').textContent = user.email;
   loadProjects();
+  loadPageContent();
 }
 
 // ---- Tabs ----
@@ -94,16 +96,34 @@ function initTabs() {
       currentCategory = btn.dataset.tab;
       updateCategoryTitle();
       showListView();
-      loadProjects();
+      updateTabView();
+      loadPageContent();
     });
   });
+}
+
+function updateTabView() {
+  const listView = document.getElementById('list-view');
+  const editView = document.getElementById('edit-view');
+  const contactFields = document.getElementById('contact-fields');
+
+  if (currentCategory === 'contact') {
+    listView.style.display = 'none';
+    editView.style.display = 'none';
+    contactFields.style.display = 'block';
+  } else {
+    listView.style.display = 'block';
+    contactFields.style.display = 'none';
+    loadProjects();
+  }
 }
 
 function updateCategoryTitle() {
   const titles = {
     film: 'Film Projects',
     photography: 'Photography',
-    commercial: 'Commercial Projects'
+    commercial: 'Commercial Projects',
+    contact: 'Contact Page'
   };
   document.getElementById('category-title').textContent = titles[currentCategory] || 'Projects';
   const viewLink = document.getElementById('view-page-link');
@@ -459,4 +479,73 @@ function showToast(message, type = '') {
   setTimeout(() => {
     toast.className = 'toast';
   }, 3000);
+}
+
+// ---- Page Content ----
+function initPageContent() {
+  const toggle = document.getElementById('page-content-toggle');
+  const form = document.getElementById('page-content-form');
+  if (toggle && form) {
+    toggle.addEventListener('click', () => {
+      const isOpen = form.style.display !== 'none';
+      form.style.display = isOpen ? 'none' : 'block';
+      toggle.classList.toggle('open', !isOpen);
+    });
+  }
+
+  document.getElementById('save-page-content-btn').addEventListener('click', savePageContent);
+}
+
+async function loadPageContent() {
+  const pageId = currentCategory;
+  try {
+    const doc = await db.collection('pageContent').doc(pageId).get();
+    const data = doc.exists ? doc.data() : {};
+
+    document.getElementById('page-title').value = data.title || '';
+    document.getElementById('page-description').value = data.description || '';
+
+    // Contact-specific fields
+    const contactFields = document.getElementById('contact-fields');
+    if (pageId === 'contact') {
+      contactFields.style.display = 'block';
+      document.getElementById('page-bio').value = data.bio || '';
+      document.getElementById('page-bio2').value = data.bio2 || '';
+      document.getElementById('page-email').value = data.email || '';
+    } else {
+      contactFields.style.display = 'none';
+    }
+  } catch (error) {
+    console.error('Error loading page content:', error);
+  }
+}
+
+async function savePageContent() {
+  const btn = document.getElementById('save-page-content-btn');
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+
+  const pageId = currentCategory;
+  const data = {
+    title: document.getElementById('page-title').value.trim(),
+    description: document.getElementById('page-description').value.trim(),
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
+
+  if (pageId === 'contact') {
+    data.bio = document.getElementById('page-bio').value.trim();
+    data.bio2 = document.getElementById('page-bio2').value.trim();
+    data.email = document.getElementById('page-email').value.trim();
+  }
+
+  try {
+    await db.collection('pageContent').doc(pageId).set(data, { merge: true });
+    showToast('Page content saved!', 'success');
+  } catch (error) {
+    console.error('Error saving page content:', error);
+    showToast('Error: ' + error.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Save Page Settings';
+  }
 }

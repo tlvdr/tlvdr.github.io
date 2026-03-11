@@ -38,6 +38,7 @@
       <h1>Portfolio Admin</h1>
       <div class="admin-user">
         <span id="admin-email"></span>
+        <a href="/admin/seed" class="btn btn-sm btn-outline" style="color:white;border-color:rgba(255,255,255,0.3);">Seed Data</a>
         <button id="logout-btn" class="btn btn-sm btn-outline" style="color:white;border-color:rgba(255,255,255,0.3);">Sign Out</button>
       </div>
     </header>
@@ -50,6 +51,41 @@
         <button class="active" data-tab="film">Film</button>
         <button data-tab="photography">Photography</button>
         <button data-tab="commercial">Commercial</button>
+        <button data-tab="contact">Contact</button>
+      </div>
+
+      <!-- Page Content Editor -->
+      <div id="page-content-section" class="page-content-section">
+        <div class="page-content-toggle" id="page-content-toggle">
+          <h3>Page Settings</h3>
+          <span class="toggle-arrow">&#9660;</span>
+        </div>
+        <div id="page-content-form" class="page-content-form" style="display:none;">
+          <div class="form-group">
+            <label for="page-title">Page Title</label>
+            <input type="text" id="page-title" placeholder="e.g. Film">
+          </div>
+          <div class="form-group">
+            <label for="page-description">Page Description (optional)</label>
+            <textarea id="page-description" placeholder="Description shown on the page..." style="min-height:60px;"></textarea>
+          </div>
+          <!-- Contact-specific fields -->
+          <div id="contact-fields" style="display:none;">
+            <div class="form-group">
+              <label for="page-bio">Bio Paragraph 1</label>
+              <textarea id="page-bio" placeholder="First paragraph of bio..." style="min-height:60px;"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="page-bio2">Bio Paragraph 2</label>
+              <textarea id="page-bio2" placeholder="Second paragraph of bio..." style="min-height:60px;"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="page-email">Email</label>
+              <input type="email" id="page-email" placeholder="info@tessavanderriet.com">
+            </div>
+          </div>
+          <button id="save-page-content-btn" class="btn btn-primary btn-sm" style="margin-top:12px;">Save Page Settings</button>
+        </div>
       </div>
 
       <!-- Projects List View -->
