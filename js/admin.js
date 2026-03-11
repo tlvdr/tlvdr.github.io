@@ -64,6 +64,7 @@ async function handleLogin() {
     let msg = 'Invalid email or password.';
     if (error.code === 'auth/user-not-found') msg = 'No account found with this email.';
     if (error.code === 'auth/too-many-requests') msg = 'Too many attempts. Try again later.';
+    if (error.code === 'auth/invalid-credential') msg = 'Invalid email or password.';
     errorEl.textContent = msg;
     errorEl.style.display = 'block';
   } finally {
@@ -115,25 +116,29 @@ async function loadProjects() {
   emptyEl.style.display = 'none';
 
   try {
+    // Simple query — no composite index needed
     const snapshot = await db.collection('projects')
       .where('category', '==', currentCategory)
-      .orderBy('order', 'asc')
       .get();
+
+    // Sort client-side by order field
+    const projects = [];
+    snapshot.forEach(doc => projects.push({ id: doc.id, ...doc.data() }));
+    projects.sort((a, b) => (a.order || 0) - (b.order || 0));
 
     listEl.innerHTML = '';
 
-    if (snapshot.empty) {
+    if (projects.length === 0) {
       emptyEl.style.display = 'block';
       return;
     }
 
-    snapshot.forEach(doc => {
-      const data = doc.data();
-      listEl.appendChild(createProjectItem(doc.id, data));
+    projects.forEach(project => {
+      listEl.appendChild(createProjectItem(project.id, project));
     });
   } catch (error) {
     console.error('Error loading projects:', error);
-    listEl.innerHTML = '<div class="empty-state">Error loading projects. Check console.</div>';
+    listEl.innerHTML = `<div class="empty-state">Error: ${error.message}<br>Make sure Firestore rules allow reads for authenticated users.</div>`;
   }
 }
 
@@ -143,17 +148,32 @@ function createProjectItem(id, data) {
   el.innerHTML = `
     ${data.thumbnailUrl ? `<img class="item-thumb" src="${data.thumbnailUrl}" alt="">` : '<div class="item-thumb"></div>'}
     <div class="item-info">
-      <div class="item-title">${data.title || 'Untitled'}</div>
-      <div class="item-meta">${data.subtitle || ''}</div>
+      <div class="item-title">${escapeHtml(data.title || 'Untitled')}</div>
+      <div class="item-meta">${escapeHtml(data.subtitle || '')} · Order: ${data.order || 0}</div>
     </div>
     <span class="item-status ${data.published ? 'published' : 'draft'}">${data.published ? 'Published' : 'Draft'}</span>
     <div class="item-actions">
       <button class="btn btn-sm btn-outline edit-btn">Edit</button>
+      <button class="btn btn-sm btn-danger delete-btn">Delete</button>
     </div>
   `;
 
   el.querySelector('.edit-btn').addEventListener('click', () => editProject(id, data));
+  el.querySelector('.delete-btn').addEventListener('click', () => quickDelete(id, data.title));
   return el;
+}
+
+// Quick delete from list view
+async function quickDelete(id, title) {
+  if (!confirm(`Delete "${title || 'Untitled'}"? This cannot be undone.`)) return;
+  try {
+    await db.collection('projects').doc(id).delete();
+    showToast('Project deleted.', 'success');
+    loadProjects();
+  } catch (error) {
+    console.error('Error deleting:', error);
+    showToast('Error: ' + error.message, 'error');
+  }
 }
 
 // ---- Form ----
@@ -175,8 +195,14 @@ function initForm() {
       showToast('File too large. Max 5MB.', 'error');
       return;
     }
-    thumbnailUrl = await uploadFile(file, 'thumbnail-progress');
-    showThumbnailPreview(thumbnailUrl);
+    try {
+      thumbnailUrl = await uploadFile(file, 'thumbnail-progress');
+      showThumbnailPreview(thumbnailUrl);
+      showToast('Thumbnail uploaded!', 'success');
+    } catch (err) {
+      showToast('Upload failed: ' + err.message, 'error');
+    }
+    e.target.value = ''; // reset input
   });
 
   // Gallery upload
@@ -187,10 +213,16 @@ function initForm() {
         showToast(`${file.name} too large. Skipping.`, 'error');
         continue;
       }
-      const url = await uploadFile(file, 'gallery-progress');
-      galleryUrls.push(url);
+      try {
+        const url = await uploadFile(file, 'gallery-progress');
+        galleryUrls.push(url);
+        showToast(`Uploaded ${file.name}`, 'success');
+      } catch (err) {
+        showToast(`Failed: ${file.name}`, 'error');
+      }
     }
     showGalleryPreview();
+    e.target.value = ''; // reset input
   });
 }
 
@@ -270,14 +302,14 @@ async function saveProject() {
       showToast('Project updated!', 'success');
     } else {
       projectData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-      await db.collection('projects').add(projectData);
+      const docRef = await db.collection('projects').add(projectData);
       showToast('Project created!', 'success');
     }
     showListView();
     loadProjects();
   } catch (error) {
     console.error('Error saving:', error);
-    showToast('Error saving project. Check console.', 'error');
+    showToast('Error: ' + error.message, 'error');
   } finally {
     btn.disabled = false;
     btn.textContent = 'Save Project';
@@ -299,7 +331,7 @@ async function deleteProject() {
     loadProjects();
   } catch (error) {
     console.error('Error deleting:', error);
-    showToast('Error deleting project.', 'error');
+    showToast('Error: ' + error.message, 'error');
   } finally {
     btn.disabled = false;
     btn.textContent = 'Delete';
@@ -326,18 +358,33 @@ async function uploadFile(file, progressBarId) {
       },
       (error) => {
         console.error('Upload error:', error);
-        showToast('Upload failed.', 'error');
         progressBar.style.display = 'none';
         reject(error);
       },
       async () => {
-        const url = await task.snapshot.ref.getDownloadURL();
-        progressBar.style.display = 'none';
-        fill.style.width = '0%';
-        resolve(url);
+        try {
+          const url = await task.snapshot.ref.getDownloadURL();
+          progressBar.style.display = 'none';
+          fill.style.width = '0%';
+          resolve(url);
+        } catch (err) {
+          progressBar.style.display = 'none';
+          reject(err);
+        }
       }
     );
   });
+}
+
+// ---- Delete uploaded file from Storage ----
+async function deleteStorageFile(url) {
+  try {
+    const ref = storage.refFromURL(url);
+    await ref.delete();
+  } catch (e) {
+    // File may already be deleted or be a local path — ignore
+    console.warn('Could not delete file from storage:', e.message);
+  }
 }
 
 // ---- Previews ----
@@ -345,13 +392,16 @@ function showThumbnailPreview(url) {
   const container = document.getElementById('thumbnail-preview');
   container.innerHTML = `
     <div class="preview-item">
-      <img src="${url}" alt="Thumbnail">
+      <img src="${escapeHtml(url)}" alt="Thumbnail">
       <button class="remove-btn" onclick="removeThumbnail()">&times;</button>
     </div>
   `;
 }
 
-function removeThumbnail() {
+async function removeThumbnail() {
+  if (thumbnailUrl && thumbnailUrl.startsWith('https://firebasestorage')) {
+    await deleteStorageFile(thumbnailUrl);
+  }
   thumbnailUrl = '';
   document.getElementById('thumbnail-preview').innerHTML = '';
 }
@@ -360,13 +410,17 @@ function showGalleryPreview() {
   const container = document.getElementById('gallery-preview');
   container.innerHTML = galleryUrls.map((url, i) => `
     <div class="gallery-item">
-      <img src="${url}" alt="Gallery image">
+      <img src="${escapeHtml(url)}" alt="Gallery image">
       <button class="remove-btn" onclick="removeGalleryImage(${i})">&times;</button>
     </div>
   `).join('');
 }
 
-function removeGalleryImage(index) {
+async function removeGalleryImage(index) {
+  const url = galleryUrls[index];
+  if (url && url.startsWith('https://firebasestorage')) {
+    await deleteStorageFile(url);
+  }
   galleryUrls.splice(index, 1);
   showGalleryPreview();
 }
@@ -386,7 +440,13 @@ function showEditView() {
   document.getElementById('edit-view').style.display = 'block';
 }
 
-// ---- Toast ----
+// ---- Helpers ----
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
 function showToast(message, type = '') {
   const toast = document.getElementById('toast');
   toast.textContent = message;

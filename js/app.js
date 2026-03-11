@@ -94,19 +94,25 @@ async function loadContent() {
   if (!grid) return;
 
   try {
+    // Simple query — no composite index needed
     const snapshot = await db.collection('projects')
       .where('category', '==', pageType)
-      .where('published', '==', true)
-      .orderBy('order', 'asc')
       .get();
 
-    // If Firebase has projects, show them instead of fallback
-    if (!snapshot.empty) {
+    // Filter and sort client-side
+    const projects = [];
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      if (data.published) projects.push({ id: doc.id, ...data });
+    });
+    projects.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+    // If Firebase has published projects, show them instead of fallback
+    if (projects.length > 0) {
       if (fallback) fallback.style.display = 'none';
       grid.innerHTML = '';
-      snapshot.forEach(doc => {
-        const data = doc.data();
-        const card = createProjectCard(doc.id, data, pageType);
+      projects.forEach(project => {
+        const card = createProjectCard(project.id, project, pageType);
         grid.appendChild(card);
       });
     } else {
