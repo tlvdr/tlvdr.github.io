@@ -182,11 +182,14 @@ async function loadPageContent() {
 
     if (pageType === 'contact') {
       const bioEl = document.querySelector('.contact-bio');
-      if (bioEl && (data.bio || data.bio2)) {
+      if (bioEl && (data.bio || data.bio2 || data.email || data.phone)) {
         let html = '';
         if (data.bio) html += `<p>${data.bio}</p>`;
         if (data.bio2) html += `<p>${data.bio2}</p>`;
-        if (data.email) html += `<div class="contact-info"><p><a href="mailto:${data.email}">${data.email}</a></p></div>`;
+        html += '<div class="contact-info">';
+        if (data.email) html += `<p><a href="mailto:${data.email}">${data.email}</a></p>`;
+        if (data.phone) html += `<p><a href="tel:${data.phone.replace(/[\s-]/g, '')}">${data.phone}</a></p>`;
+        html += '</div>';
         bioEl.innerHTML = html;
       }
     } else {

@@ -512,6 +512,7 @@ async function loadPageContent() {
       document.getElementById('page-bio').value = data.bio || '';
       document.getElementById('page-bio2').value = data.bio2 || '';
       document.getElementById('page-email').value = data.email || '';
+      document.getElementById('page-phone').value = data.phone || '';
     } else {
       contactFields.style.display = 'none';
     }
@@ -536,6 +537,7 @@ async function savePageContent() {
     data.bio = document.getElementById('page-bio').value.trim();
     data.bio2 = document.getElementById('page-bio2').value.trim();
     data.email = document.getElementById('page-email').value.trim();
+    data.phone = document.getElementById('page-phone').value.trim();
   }
 
   try {

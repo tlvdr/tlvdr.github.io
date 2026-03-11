@@ -141,17 +141,17 @@ ul {
 .site-nav {
   display: flex;
   justify-content: center;
-  gap: 32px;
+  gap: 40px;
   padding-bottom: 16px;
 }
 
 .site-nav a {
-  font-family: var(--font-nav);
+  font-family: var(--font-body);
   font-weight: 400;
-  font-size: 18px;
-  letter-spacing: 0.14em;
+  font-size: 14px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  padding: 8px 12px;
+  padding: 8px 4px;
   transition: color 0.2s ease, opacity 0.2s ease;
   opacity: 0.7;
 }
