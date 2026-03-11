@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin — Tessa van der Riet</title>
+  <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <!-- Login Screen -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <img src="../images/TessavanderRiet_LogoWebsite.webp" alt="Tessa van der Riet">
+      <h2>Admin Panel</h2>
+      <p>Sign in to manage your portfolio</p>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Password">
+      </div>
+      <div id="login-error" class="error-message" style="display:none;"></div>
+      <button id="login-btn" class="btn btn-primary" style="width:100%; margin-top:16px;">Sign In</button>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div id="admin-dashboard" class="admin-wrapper" style="display:none;">
+
+    <!-- Admin Header -->
+    <header class="admin-header">
+      <h1>Portfolio Admin</h1>
+      <div class="admin-user">
+        <span id="admin-email"></span>
+        <button id="logout-btn" class="btn btn-sm btn-outline" style="color:white;border-color:rgba(255,255,255,0.3);">Sign Out</button>
+      </div>
+    </header>
+
+    <!-- Admin Main -->
+    <div class="admin-main">
+
+      <!-- Category Tabs -->
+      <div class="admin-tabs">
+        <button class="active" data-tab="film">Film</button>
+        <button data-tab="photography">Photography</button>
+        <button data-tab="commercial">Commercial</button>
+      </div>
+
+      <!-- Projects List View -->
+      <div id="list-view">
+        <div class="projects-toolbar">
+          <h2 id="category-title">Film Projects</h2>
+          <button id="add-project-btn" class="btn btn-primary">+ Add Project</button>
+        </div>
+        <div id="projects-list" class="projects-list">
+          <!-- Populated by JS -->
+        </div>
+        <div id="projects-empty" class="empty-state" style="display:none;">
+          No projects in this category yet. Click "Add Project" to create one.
+        </div>
+      </div>
+
+      <!-- Project Edit View -->
+      <div id="edit-view" style="display:none;">
+        <a href="#" id="back-to-list" class="back-link">&larr; Back to list</a>
+        <div class="edit-form">
+          <h2 id="form-title">New Project</h2>
+          <input type="hidden" id="project-id">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="project-title">Project Title</label>
+              <input type="text" id="project-title" placeholder="e.g. De Hemelse Bloem">
+            </div>
+            <div class="form-group">
+              <label for="project-subtitle">Subtitle / Type</label>
+              <input type="text" id="project-subtitle" placeholder="e.g. Documentary, Short Film">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="project-description">Description</label>
+            <textarea id="project-description" placeholder="Describe the project..."></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="project-vimeo">Vimeo Embed URL (optional)</label>
+              <input type="url" id="project-vimeo" placeholder="https://player.vimeo.com/video/...">
+            </div>
+            <div class="form-group">
+              <label for="project-link">External Link (optional)</label>
+              <input type="url" id="project-link" placeholder="https://...">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="project-order">Display Order</label>
+              <input type="number" id="project-order" value="0" min="0">
+            </div>
+            <div class="form-group">
+              <label for="project-published">Status</label>
+              <select id="project-published">
+                <option value="true">Published</option>
+                <option value="false">Draft</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Thumbnail Upload -->
+          <div class="form-group">
+            <label>Thumbnail Image</label>
+            <div class="file-upload" id="thumbnail-upload">
+              <div class="upload-icon">&#128247;</div>
+              <div class="upload-text">
+                <strong>Click to upload</strong> or drag and drop<br>
+                JPG, PNG, WebP (max 5MB)
+              </div>
+              <input type="file" id="thumbnail-file" accept="image/*">
+            </div>
+            <div class="progress-bar" id="thumbnail-progress" style="display:none;">
+              <div class="progress-fill"></div>
+            </div>
+            <div class="upload-preview" id="thumbnail-preview"></div>
+          </div>
+
+          <!-- Gallery Upload (for detail pages) -->
+          <div class="form-group">
+            <label>Gallery Images (optional)</label>
+            <div class="file-upload" id="gallery-upload">
+              <div class="upload-icon">&#128248;</div>
+              <div class="upload-text">
+                <strong>Click to upload multiple</strong> images<br>
+                JPG, PNG, WebP (max 5MB each)
+              </div>
+              <input type="file" id="gallery-files" accept="image/*" multiple>
+            </div>
+            <div class="progress-bar" id="gallery-progress" style="display:none;">
+              <div class="progress-fill"></div>
+            </div>
+            <div class="gallery-grid" id="gallery-preview"></div>
+          </div>
+
+          <div class="form-actions">
+            <button id="save-project-btn" class="btn btn-primary">Save Project</button>
+            <button id="cancel-edit-btn" class="btn btn-secondary">Cancel</button>
+            <button id="delete-project-btn" class="btn btn-danger" style="margin-left:auto; display:none;">Delete</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="../js/firebase-config.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

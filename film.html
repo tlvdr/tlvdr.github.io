@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Film — Tessa van der Riet</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="canonical" href="film">
+  <meta property="og:title" content="Film — Tessa van der Riet">
+  <meta property="og:url" content="https://www.tessavanderriet.com/film">
+  <meta property="og:site_name" content="Tessa van der Riet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="film">
+  <div class="site-wrapper">
+
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container">
+        <a href="index.html" class="logo-link">
+          <img src="images/TessavanderRiet_LogoWebsite.webp" alt="Tessa van der Riet">
+        </a>
+        <div class="site-tagline">DIRECTOR&nbsp;&nbsp;|&nbsp;&nbsp;PHOTOGRAPHER</div>
+        <button class="menu-toggle" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="site-nav">
+          <a href="film.html" class="active">Film</a>
+          <a href="photography.html">Photography</a>
+          <a href="commercial.html">Commercial</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <div class="container">
+        <div class="page-header">
+          <h1>Film</h1>
+        </div>
+
+        <!-- Dynamic content from Firebase -->
+        <div id="content-grid" class="project-grid"></div>
+
+        <!-- Fallback content (shown before Firebase is configured) -->
+        <div id="fallback-content" class="project-grid">
+          <div class="project-card" onclick="window.location.href='dhb.html'">
+            <img class="card-image" src="images/DeHemelseBloem_Still01.webp" alt="De Hemelse Bloem" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-title">De Hemelse Bloem</div>
+              <div class="card-subtitle">Documentary</div>
+            </div>
+          </div>
+          <div class="project-card" onclick="window.location.href='grip.html'">
+            <img class="card-image" src="images/grip.webp" alt="Grip" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-title">Grip</div>
+              <div class="card-subtitle">Documentary</div>
+            </div>
+          </div>
+          <div class="project-card" onclick="window.location.href='cami.html'">
+            <img class="card-image" src="images/pajaroEnjaulado.webp" alt="Cami" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-title">El P&aacute;jaro Enjaulado</div>
+              <div class="card-subtitle">Short Film</div>
+            </div>
+          </div>
+          <div class="project-card" onclick="window.location.href='kdo-3.html'">
+            <img class="card-image" src="images/BetweenTheLines_Still.webp" alt="Between The Lines" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-title">Between The Lines</div>
+              <div class="card-subtitle">Short Documentary</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        &copy; 2026 Tessa van der Riet. All rights reserved.
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

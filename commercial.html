@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Commercial — Tessa van der Riet</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="canonical" href="commercial">
+  <meta property="og:title" content="Commercial — Tessa van der Riet">
+  <meta property="og:url" content="https://www.tessavanderriet.com/commercial">
+  <meta property="og:site_name" content="Tessa van der Riet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="commercial">
+  <div class="site-wrapper">
+
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container">
+        <a href="index.html" class="logo-link">
+          <img src="images/TessavanderRiet_LogoWebsite.webp" alt="Tessa van der Riet">
+        </a>
+        <div class="site-tagline">DIRECTOR&nbsp;&nbsp;|&nbsp;&nbsp;PHOTOGRAPHER</div>
+        <button class="menu-toggle" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="site-nav">
+          <a href="film.html">Film</a>
+          <a href="photography.html">Photography</a>
+          <a href="commercial.html" class="active">Commercial</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <div class="container">
+        <div class="page-header">
+          <h1>Commercial</h1>
+        </div>
+
+        <!-- Dynamic content from Firebase -->
+        <div id="content-grid" class="project-grid"></div>
+
+        <!-- Fallback content (shown before Firebase is configured) -->
+        <div id="fallback-content" class="project-grid">
+          <div class="project-card">
+            <img class="card-image" src="images/JARRITOS_Still.webp" alt="Jarritos" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-title">Jarritos</div>
+              <div class="card-subtitle">Commercial</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <img class="card-image" src="images/corporate1.webp" alt="Corporate" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-title">Corporate</div>
+              <div class="card-subtitle">Brand Content</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <img class="card-image" src="images/corporate2.webp" alt="Corporate" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-title">Corporate</div>
+              <div class="card-subtitle">Brand Content</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <img class="card-image" src="images/DNAtest.webp" alt="DNA Test" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-title">DNA Test</div>
+              <div class="card-subtitle">Commercial</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <img class="card-image" src="images/eventparadiso.webp" alt="Events" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-title">Paradiso</div>
+              <div class="card-subtitle">Event Coverage</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <img class="card-image" src="images/event1.webp" alt="Event" loading="lazy">
+            <div class="card-overlay">
+              <div class="card-title">Events</div>
+              <div class="card-subtitle">Event Photography</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        &copy; 2026 Tessa van der Riet. All rights reserved.
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
