@@ -162,6 +162,18 @@ function createProjectCard(id, data, pageType) {
   return card;
 }
 
+// --- Render text with markdown-style links: [text](url) ---
+function renderText(str) {
+  // Escape HTML first to prevent XSS
+  const div = document.createElement('div');
+  div.textContent = str;
+  let safe = div.innerHTML;
+  // Convert [link text](url) to <a> tags
+  safe = safe.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
+    '<a href="$2" target="_blank" rel="noreferrer" style="color:var(--color-accent);">$1</a>');
+  return safe;
+}
+
 // --- Load Page Content from Firebase ---
 async function loadPageContent() {
   const pageType = document.body.dataset.page;
@@ -184,8 +196,8 @@ async function loadPageContent() {
       const bioEl = document.querySelector('.contact-bio');
       if (bioEl && (data.bio || data.bio2 || data.email || data.phone)) {
         let html = '';
-        if (data.bio) html += `<p>${data.bio}</p>`;
-        if (data.bio2) html += `<p>${data.bio2}</p>`;
+        if (data.bio) html += `<p>${renderText(data.bio)}</p>`;
+        if (data.bio2) html += `<p>${renderText(data.bio2)}</p>`;
         html += '<div class="contact-info">';
         if (data.email) html += `<p><a href="mailto:${data.email}">${data.email}</a></p>`;
         if (data.phone) html += `<p><a href="tel:${data.phone.replace(/[\s-]/g, '')}">${data.phone}</a></p>`;
@@ -199,7 +211,7 @@ async function loadPageContent() {
 
       const descEl = document.getElementById('page-description');
       if (descEl && data.description) {
-        descEl.textContent = data.description;
+        descEl.innerHTML = renderText(data.description);
         descEl.style.display = 'block';
       }
     }
