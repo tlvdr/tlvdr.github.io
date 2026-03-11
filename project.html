@@ -74,14 +74,14 @@
       const params = new URLSearchParams(window.location.search);
       const projectId = params.get('id');
       if (!projectId) {
-        window.location.href = 'film.html';
+        window.location.href = 'film';
         return;
       }
 
       try {
         const doc = await db.collection('projects').doc(projectId).get();
         if (!doc.exists) {
-          window.location.href = 'film.html';
+          window.location.href = 'film';
           return;
         }
 
@@ -92,14 +92,14 @@
 
         // Back link based on category
         const backLink = document.getElementById('back-link');
-        const categoryPages = { film: 'film.html', photography: 'photography.html', commercial: 'commercial.html' };
-        backLink.href = categoryPages[data.category] || 'film.html';
+        const categoryPages = { film: 'film', photography: 'photography', commercial: 'commercial' };
+        backLink.href = categoryPages[data.category] || 'film';
         backLink.textContent = `\u2190 Back to ${data.category || 'Film'}`;
 
         // Title & description
         document.getElementById('detail-title').textContent = data.title || '';
         document.getElementById('detail-subtitle').textContent = data.subtitle || '';
-        document.getElementById('detail-description').textContent = data.description || '';
+        document.getElementById('detail-description').innerHTML = renderText(data.description || '');
 
         // Video or hero image
         if (data.vimeoUrl) {
