@@ -106,6 +106,11 @@ function updateCategoryTitle() {
     commercial: 'Commercial Projects'
   };
   document.getElementById('category-title').textContent = titles[currentCategory] || 'Projects';
+  const viewLink = document.getElementById('view-page-link');
+  if (viewLink) {
+    viewLink.href = `/${currentCategory}`;
+    viewLink.textContent = `View ${currentCategory} page →`;
+  }
 }
 
 // ---- Load Projects ----

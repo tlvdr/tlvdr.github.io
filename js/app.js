@@ -94,12 +94,10 @@ async function loadContent() {
   if (!grid) return;
 
   try {
-    // Simple query — no composite index needed
     const snapshot = await db.collection('projects')
       .where('category', '==', pageType)
       .get();
 
-    // Filter and sort client-side
     const projects = [];
     snapshot.forEach(doc => {
       const data = doc.data();
@@ -107,7 +105,6 @@ async function loadContent() {
     });
     projects.sort((a, b) => (a.order || 0) - (b.order || 0));
 
-    // If Firebase has published projects, show them instead of fallback
     if (projects.length > 0) {
       if (fallback) fallback.style.display = 'none';
       grid.innerHTML = '';
@@ -116,12 +113,10 @@ async function loadContent() {
         grid.appendChild(card);
       });
     } else {
-      // No projects in Firebase — keep showing the fallback content
       grid.style.display = 'none';
     }
   } catch (error) {
-    console.error('Error loading content:', error);
-    // On error, just keep showing fallback
+    console.warn('Firebase read failed (check Firestore rules allow public reads):', error.code);
     grid.style.display = 'none';
   }
 }
@@ -158,7 +153,7 @@ function createProjectCard(id, data, pageType) {
       if (data.link) {
         window.location.href = data.link;
       } else {
-        window.location.href = `project.html?id=${id}`;
+        window.location.href = `project?id=${id}`;
       }
     });
   }
