@@ -221,7 +221,8 @@ function initForm() {
       return;
     }
     try {
-      thumbnailUrl = await uploadFile(file, 'thumbnail-progress');
+      const processed = await processThumbnail(file);
+      thumbnailUrl = await uploadFile(processed, 'thumbnail-progress');
       showThumbnailPreview(thumbnailUrl);
       showToast('Thumbnail uploaded!', 'success');
     } catch (err) {
@@ -239,7 +240,8 @@ function initForm() {
         continue;
       }
       try {
-        const url = await uploadFile(file, 'gallery-progress');
+        const processed = await processGalleryImage(file);
+        const url = await uploadFile(processed, 'gallery-progress');
         galleryUrls.push(url);
         showToast(`Uploaded ${file.name}`, 'success');
       } catch (err) {
@@ -361,6 +363,67 @@ async function deleteProject() {
     btn.disabled = false;
     btn.textContent = 'Delete';
   }
+}
+
+// ---- Image processing (resize/crop before upload) ----
+// Keeps uploads small so the public site loads fast. GIFs and SVGs pass through.
+async function loadBitmap(file) {
+  if (typeof createImageBitmap === 'function') {
+    try {
+      return await createImageBitmap(file, { imageOrientation: 'from-image' });
+    } catch (e) { /* fall through */ }
+  }
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error('Could not read image'));
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+async function processImage(file, { maxSize, cropSquare = false } = {}) {
+  if (!/^image\/(jpeg|png|webp)$/.test(file.type)) return file;
+
+  const bmp = await loadBitmap(file);
+  const w = bmp.width, h = bmp.height;
+
+  let srcX = 0, srcY = 0, srcW = w, srcH = h;
+  if (cropSquare) {
+    const side = Math.min(w, h);
+    srcX = (w - side) / 2;
+    srcY = (h - side) / 2;
+    srcW = srcH = side;
+  }
+
+  const scale = Math.min(1, maxSize / Math.max(srcW, srcH));
+  const outW = Math.round(srcW * scale);
+  const outH = Math.round(srcH * scale);
+
+  // Nothing to do — already small enough and no crop needed
+  if (scale === 1 && !cropSquare) return file;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = outW;
+  canvas.height = outH;
+  canvas.getContext('2d').drawImage(bmp, srcX, srcY, srcW, srcH, 0, 0, outW, outH);
+
+  const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.85));
+  if (!blob) return file;
+
+  const newName = file.name.replace(/\.[^.]+$/, '') + '.jpg';
+  return new File([blob], newName, { type: 'image/jpeg' });
+}
+
+async function processThumbnail(file) {
+  // Photography thumbnails are shown as squares in the grid — store them that way.
+  if (currentCategory === 'photography') {
+    return processImage(file, { maxSize: 1200, cropSquare: true });
+  }
+  return processImage(file, { maxSize: 1920 });
+}
+
+function processGalleryImage(file) {
+  return processImage(file, { maxSize: 2400 });
 }
 
 // ---- File Upload ----

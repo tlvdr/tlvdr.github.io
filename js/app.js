@@ -214,8 +214,12 @@ function getSlideshowEl() {
 }
 
 function openPhotoSlideshow(data) {
-  const images = [data.thumbnailUrl, ...(data.galleryImages || [])]
-    .filter((url, i, arr) => url && arr.indexOf(url) === i);
+  // Thumbnails are square crops for the grid — prefer the full gallery images,
+  // and only fall back to the thumbnail when a project has no gallery.
+  const gallery = (data.galleryImages || []).filter(Boolean);
+  const images = gallery.length > 0
+    ? gallery.filter((url, i, arr) => arr.indexOf(url) === i)
+    : [data.thumbnailUrl].filter(Boolean);
   if (images.length === 0) return;
 
   const el = getSlideshowEl();
