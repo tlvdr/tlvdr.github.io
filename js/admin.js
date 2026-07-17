@@ -216,8 +216,8 @@ function initForm() {
   document.getElementById('thumbnail-file').addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    if (file.size > 5 * 1024 * 1024) {
-      showToast('File too large. Max 5MB.', 'error');
+    if (file.size > 25 * 1024 * 1024) {
+      showToast('File too large. Max 25MB.', 'error');
       return;
     }
     try {
@@ -234,7 +234,7 @@ function initForm() {
   document.getElementById('gallery-files').addEventListener('change', async (e) => {
     const files = Array.from(e.target.files);
     for (const file of files) {
-      if (file.size > 5 * 1024 * 1024) {
+      if (file.size > 25 * 1024 * 1024) {
         showToast(`${file.name} too large. Skipping.`, 'error');
         continue;
       }
@@ -243,7 +243,7 @@ function initForm() {
         galleryUrls.push(url);
         showToast(`Uploaded ${file.name}`, 'success');
       } catch (err) {
-        showToast(`Failed: ${file.name}`, 'error');
+        showToast(`Failed: ${file.name} (${err.code || err.message})`, 'error');
       }
     }
     showGalleryPreview();
