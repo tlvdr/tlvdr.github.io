@@ -80,19 +80,28 @@ function initLightbox() {
 async function loadContent() {
   const pageType = document.body.dataset.page;
   if (!pageType || pageType === 'home' || pageType === 'contact' || pageType === 'project') return;
-  if (typeof firebase === 'undefined') return;
-
-  // Check if Firebase is configured
-  try {
-    const app = firebase.app();
-    if (app.options.apiKey === 'YOUR_API_KEY') return;
-  } catch (e) {
-    return;
-  }
 
   const grid = document.getElementById('content-grid');
   const fallback = document.getElementById('fallback-content');
   if (!grid) return;
+
+  // Fallback content is hidden by default (to avoid a flash of old content);
+  // show it again whenever Firebase content can't be loaded.
+  const showFallback = () => {
+    grid.style.display = 'none';
+    if (fallback) fallback.style.display = '';
+  };
+
+  if (typeof firebase === 'undefined') { showFallback(); return; }
+
+  // Check if Firebase is configured
+  try {
+    const app = firebase.app();
+    if (app.options.apiKey === 'YOUR_API_KEY') { showFallback(); return; }
+  } catch (e) {
+    showFallback();
+    return;
+  }
 
   try {
     const snapshot = await db.collection('projects')
@@ -107,18 +116,17 @@ async function loadContent() {
     projects.sort((a, b) => (a.order || 0) - (b.order || 0));
 
     if (projects.length > 0) {
-      if (fallback) fallback.style.display = 'none';
       grid.innerHTML = '';
       projects.forEach(project => {
         const card = createProjectCard(project.id, project, pageType);
         grid.appendChild(card);
       });
     } else {
-      grid.style.display = 'none';
+      showFallback();
     }
   } catch (error) {
     console.warn('Firebase read failed (check Firestore rules allow public reads):', error.code);
-    grid.style.display = 'none';
+    showFallback();
   }
 }
 
