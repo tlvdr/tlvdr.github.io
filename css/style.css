@@ -510,6 +510,125 @@ main {
   z-index: 1001;
 }
 
+/* --- Photo Slideshow Overlay --- */
+.photo-slideshow {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 1000;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 0 24px;
+}
+
+.photo-slideshow.active {
+  display: flex;
+}
+
+.slideshow-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  padding: 0 8px;
+}
+
+.slideshow-stage img {
+  max-width: min(80vw, 1100px);
+  max-height: 100%;
+  object-fit: contain;
+  user-select: none;
+}
+
+.slideshow-arrow {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 40px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 16px 12px;
+  font-family: var(--font-heading);
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+
+.slideshow-arrow:hover {
+  color: var(--color-white);
+}
+
+.slideshow-arrow[disabled] {
+  visibility: hidden;
+}
+
+.slideshow-caption {
+  text-align: center;
+  color: var(--color-white);
+  max-width: 640px;
+  padding: 16px 24px 0;
+}
+
+.slideshow-caption h3 {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.slideshow-caption p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.5;
+}
+
+.slideshow-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding-top: 14px;
+}
+
+.slideshow-dots button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.35);
+  transition: background 0.2s;
+}
+
+.slideshow-dots button.active {
+  background: var(--color-white);
+}
+
+@media (max-width: 768px) {
+  .slideshow-arrow {
+    font-size: 28px;
+    padding: 12px 8px;
+  }
+  .slideshow-stage img {
+    max-width: 78vw;
+  }
+  .slideshow-caption h3 {
+    font-size: 15px;
+  }
+  .slideshow-caption p {
+    font-size: 13px;
+  }
+}
+
 /* --- Loading State (for Firebase content) --- */
 .loading-spinner {
   display: flex;

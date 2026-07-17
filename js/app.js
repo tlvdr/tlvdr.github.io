@@ -128,17 +128,8 @@ function createProjectCard(id, data, pageType) {
 
   if (pageType === 'photography') {
     card.className = 'photo-item';
-    card.setAttribute('data-lightbox', data.thumbnailUrl || '');
     card.innerHTML = `<img src="${data.thumbnailUrl || ''}" alt="${data.title || ''}" loading="lazy">`;
-    // Re-init lightbox for dynamically added items
-    card.addEventListener('click', () => {
-      const lightbox = document.getElementById('lightbox');
-      if (lightbox) {
-        lightbox.querySelector('img').src = data.thumbnailUrl || '';
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-    });
+    card.addEventListener('click', () => openPhotoSlideshow(data));
   } else {
     card.className = 'project-card';
     card.innerHTML = `
@@ -160,6 +151,114 @@ function createProjectCard(id, data, pageType) {
   }
 
   return card;
+}
+
+// --- Photo Slideshow Overlay ---
+let slideshowState = null;
+
+function getSlideshowEl() {
+  let el = document.getElementById('photo-slideshow');
+  if (el) return el;
+
+  el = document.createElement('div');
+  el.id = 'photo-slideshow';
+  el.className = 'photo-slideshow';
+  el.innerHTML = `
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <div class="slideshow-stage">
+      <button class="slideshow-arrow prev" aria-label="Previous">&#8249;</button>
+      <img src="" alt="">
+      <button class="slideshow-arrow next" aria-label="Next">&#8250;</button>
+    </div>
+    <div class="slideshow-caption">
+      <h3></h3>
+      <p></p>
+      <div class="slideshow-dots"></div>
+    </div>
+  `;
+  document.body.appendChild(el);
+
+  el.querySelector('.lightbox-close').addEventListener('click', closePhotoSlideshow);
+  el.querySelector('.slideshow-arrow.prev').addEventListener('click', () => stepSlideshow(-1));
+  el.querySelector('.slideshow-arrow.next').addEventListener('click', () => stepSlideshow(1));
+  el.addEventListener('click', (e) => {
+    if (e.target === el || e.target.classList.contains('slideshow-stage')) closePhotoSlideshow();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!slideshowState) return;
+    if (e.key === 'Escape') closePhotoSlideshow();
+    if (e.key === 'ArrowLeft') stepSlideshow(-1);
+    if (e.key === 'ArrowRight') stepSlideshow(1);
+  });
+
+  // Swipe support
+  let touchX = null;
+  el.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+  el.addEventListener('touchend', (e) => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) stepSlideshow(dx < 0 ? 1 : -1);
+    touchX = null;
+  }, { passive: true });
+
+  return el;
+}
+
+function openPhotoSlideshow(data) {
+  const images = [data.thumbnailUrl, ...(data.galleryImages || [])]
+    .filter((url, i, arr) => url && arr.indexOf(url) === i);
+  if (images.length === 0) return;
+
+  const el = getSlideshowEl();
+  slideshowState = { images, index: 0 };
+
+  el.querySelector('.slideshow-caption h3').textContent = data.title || '';
+  el.querySelector('.slideshow-caption p').innerHTML = renderText(data.description || data.subtitle || '');
+
+  const dots = el.querySelector('.slideshow-dots');
+  dots.innerHTML = '';
+  if (images.length > 1) {
+    images.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.setAttribute('aria-label', `Photo ${i + 1}`);
+      dot.addEventListener('click', () => { slideshowState.index = i; renderSlideshow(); });
+      dots.appendChild(dot);
+    });
+  }
+
+  // Preload the rest of the series
+  images.slice(1).forEach(url => { new Image().src = url; });
+
+  renderSlideshow();
+  el.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderSlideshow() {
+  const el = document.getElementById('photo-slideshow');
+  const { images, index } = slideshowState;
+  el.querySelector('.slideshow-stage img').src = images[index];
+  el.querySelector('.slideshow-arrow.prev').disabled = index === 0;
+  el.querySelector('.slideshow-arrow.next').disabled = index === images.length - 1;
+  el.querySelectorAll('.slideshow-dots button').forEach((dot, i) => {
+    dot.classList.toggle('active', i === index);
+  });
+}
+
+function stepSlideshow(dir) {
+  if (!slideshowState) return;
+  const next = slideshowState.index + dir;
+  if (next < 0 || next >= slideshowState.images.length) return;
+  slideshowState.index = next;
+  renderSlideshow();
+}
+
+function closePhotoSlideshow() {
+  const el = document.getElementById('photo-slideshow');
+  if (el) el.classList.remove('active');
+  slideshowState = null;
+  document.body.style.overflow = '';
 }
 
 // --- Render text with markdown-style links: [text](url) ---
