@@ -26,6 +26,19 @@
         <button id="seed-btn" class="btn btn-primary">Seed All Projects</button>
         <button id="seed-pages-btn" class="btn btn-secondary" style="margin-left:12px;">Seed Page Content</button>
       </div>
+
+      <div class="edit-form" style="max-width:700px; margin-top:24px;">
+        <h2>Migrate Legacy Thumbnails to Storage</h2>
+        <p style="margin-bottom:24px; color:var(--color-subtle); font-size:14px;">
+          Some older projects still point at static files in <code>/images/</code> instead of Firebase Storage
+          (a leftover from the initial seed). This uploads those images to Storage and updates each
+          project's <code>thumbnailUrl</code>, so they show up in the "Choose existing image" picker
+          and can be rearranged like any other upload. Safe to run more than once — already-migrated
+          projects are skipped.
+        </p>
+        <div id="migrate-status" style="margin-bottom:16px;"></div>
+        <button id="migrate-btn" class="btn btn-primary">Migrate Legacy Thumbnails</button>
+      </div>
     </div>
   </div>
 
@@ -45,6 +58,7 @@
         statusEl.innerHTML = '<p style="color:#c0392b;">You must be logged in. <a href="/admin">Go to admin</a> and sign in first.</p>';
         document.getElementById('seed-btn').disabled = true;
         document.getElementById('seed-pages-btn').disabled = true;
+        document.getElementById('migrate-btn').disabled = true;
       }
     });
 
@@ -238,6 +252,109 @@
 
       btn.textContent = 'Done';
       statusEl.innerHTML += `<p style="color:#1e8449;"><strong>Page content seeded!</strong></p>`;
+    });
+
+    // ---- Migrate legacy /images/ thumbnails into Firebase Storage ----
+    const migrateStatusEl = document.getElementById('migrate-status');
+
+    async function loadBitmapFromBlob(blob) {
+      if (typeof createImageBitmap === 'function') {
+        try {
+          return await createImageBitmap(blob, { imageOrientation: 'from-image' });
+        } catch (e) { /* fall through */ }
+      }
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error('Could not read image'));
+        img.src = URL.createObjectURL(blob);
+      });
+    }
+
+    async function resizeAndMaybeCrop(blob, { maxSize, cropSquare }) {
+      const bmp = await loadBitmapFromBlob(blob);
+      const w = bmp.width, h = bmp.height;
+
+      let srcX = 0, srcY = 0, srcW = w, srcH = h;
+      if (cropSquare) {
+        const side = Math.min(w, h);
+        srcX = (w - side) / 2;
+        srcY = (h - side) / 2;
+        srcW = srcH = side;
+      }
+
+      const scale = Math.min(1, maxSize / Math.max(srcW, srcH));
+      const outW = Math.round(srcW * scale);
+      const outH = Math.round(srcH * scale);
+
+      const canvas = document.createElement('canvas');
+      canvas.width = outW;
+      canvas.height = outH;
+      canvas.getContext('2d').drawImage(bmp, srcX, srcY, srcW, srcH, 0, 0, outW, outH);
+
+      return new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.85));
+    }
+
+    document.getElementById('migrate-btn').addEventListener('click', async () => {
+      const btn = document.getElementById('migrate-btn');
+      btn.disabled = true;
+      btn.textContent = 'Migrating...';
+      migrateStatusEl.innerHTML = '';
+
+      let migrated = 0, skipped = 0, failed = 0;
+
+      try {
+        const snapshot = await db.collection('projects').get();
+        const legacy = [];
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          if (data.thumbnailUrl && data.thumbnailUrl.startsWith('/images/')) {
+            legacy.push({ id: doc.id, ...data });
+          }
+        });
+
+        if (legacy.length === 0) {
+          migrateStatusEl.innerHTML = '<p style="color:#1e8449;">Nothing to migrate — no projects reference local /images/ files.</p>';
+          btn.textContent = 'Migrate Legacy Thumbnails';
+          btn.disabled = false;
+          return;
+        }
+
+        for (const project of legacy) {
+          try {
+            migrateStatusEl.innerHTML = `<p>Migrating "${project.title}" (${migrated + failed + 1} / ${legacy.length})...</p>`;
+
+            const res = await fetch(project.thumbnailUrl);
+            if (!res.ok) throw new Error(`Could not fetch ${project.thumbnailUrl}`);
+            const sourceBlob = await res.blob();
+
+            const isPhotography = project.category === 'photography';
+            const processedBlob = await resizeAndMaybeCrop(sourceBlob, {
+              maxSize: isPhotography ? 1200 : 1920,
+              cropSquare: isPhotography
+            });
+
+            const baseName = project.thumbnailUrl.split('/').pop().replace(/\.[^.]+$/, '');
+            const path = `portfolio/${project.category}/${Date.now()}_${baseName}.jpg`;
+            const ref = storage.ref(path);
+            await ref.put(processedBlob, { contentType: 'image/jpeg' });
+            const newUrl = await ref.getDownloadURL();
+
+            await db.collection('projects').doc(project.id).update({ thumbnailUrl: newUrl });
+            migrated++;
+          } catch (err) {
+            failed++;
+            migrateStatusEl.innerHTML += `<p style="color:#c0392b;">Failed "${project.title}": ${err.message}</p>`;
+          }
+        }
+
+        migrateStatusEl.innerHTML += `<p style="color:#1e8449;"><strong>Done. Migrated ${migrated}, failed ${failed}.</strong></p>`;
+      } catch (err) {
+        migrateStatusEl.innerHTML += `<p style="color:#c0392b;">Error: ${err.message}</p>`;
+      } finally {
+        btn.textContent = 'Migrate Legacy Thumbnails';
+        btn.disabled = false;
+      }
     });
   </script>
 </body>
