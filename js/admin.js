@@ -251,6 +251,130 @@ function initForm() {
     showGalleryPreview();
     e.target.value = ''; // reset input
   });
+
+  initMediaPicker();
+}
+
+// ---- Media Library Picker (reuse previously uploaded images) ----
+let mediaLibraryCache = null; // invalidated on new uploads
+
+async function listAllFiles(ref) {
+  const result = await ref.listAll();
+  const nested = await Promise.all(result.prefixes.map(listAllFiles));
+  return result.items.concat(...nested);
+}
+
+async function loadMediaLibrary(forceRefresh = false) {
+  if (mediaLibraryCache && !forceRefresh) return mediaLibraryCache;
+  const items = await listAllFiles(storage.ref('portfolio'));
+  const withUrls = await Promise.all(items.map(async item => {
+    try {
+      return { path: item.fullPath, url: await item.getDownloadURL() };
+    } catch (e) {
+      return null;
+    }
+  }));
+  mediaLibraryCache = withUrls.filter(Boolean).reverse(); // newest first
+  return mediaLibraryCache;
+}
+
+function initMediaPicker() {
+  const modal = document.getElementById('media-modal');
+  const closeBtn = document.getElementById('media-modal-close');
+  const addBtn = document.getElementById('media-modal-add-btn');
+
+  document.querySelectorAll('.choose-existing-btn').forEach(btn => {
+    btn.addEventListener('click', () => openMediaPicker(btn.dataset.target));
+  });
+
+  closeBtn.addEventListener('click', closeMediaPicker);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeMediaPicker();
+  });
+  addBtn.addEventListener('click', confirmMediaSelection);
+}
+
+let mediaPickerMode = 'thumbnail'; // 'thumbnail' | 'gallery'
+let mediaPickerSelected = [];
+
+async function openMediaPicker(mode) {
+  mediaPickerMode = mode;
+  mediaPickerSelected = [];
+
+  const modal = document.getElementById('media-modal');
+  const body = document.getElementById('media-modal-body');
+  const footer = document.getElementById('media-modal-footer');
+  footer.style.display = mode === 'gallery' ? 'flex' : 'none';
+  body.innerHTML = '<div class="loading-spinner"></div>';
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  try {
+    const files = await loadMediaLibrary();
+    renderMediaPickerGrid(files);
+  } catch (e) {
+    body.innerHTML = `<div class="media-modal-empty">Could not load images: ${escapeHtml(e.message)}</div>`;
+  }
+}
+
+function renderMediaPickerGrid(files) {
+  const body = document.getElementById('media-modal-body');
+  if (files.length === 0) {
+    body.innerHTML = '<div class="media-modal-empty">No images uploaded yet.</div>';
+    return;
+  }
+
+  const grid = document.createElement('div');
+  grid.className = 'media-picker-grid';
+  files.forEach(file => {
+    const item = document.createElement('div');
+    item.className = 'media-picker-item';
+    item.innerHTML = `<img src="${escapeHtml(file.url)}" alt="" loading="lazy">`;
+    item.addEventListener('click', () => selectMediaItem(item, file));
+    grid.appendChild(item);
+  });
+  body.innerHTML = '';
+  body.appendChild(grid);
+  updateMediaModalCount();
+}
+
+function selectMediaItem(el, file) {
+  if (mediaPickerMode === 'thumbnail') {
+    thumbnailUrl = file.url;
+    showThumbnailPreview(thumbnailUrl);
+    closeMediaPicker();
+    return;
+  }
+
+  // Gallery mode: multi-select
+  const idx = mediaPickerSelected.indexOf(file.url);
+  if (idx === -1) {
+    mediaPickerSelected.push(file.url);
+    el.classList.add('selected');
+  } else {
+    mediaPickerSelected.splice(idx, 1);
+    el.classList.remove('selected');
+  }
+  updateMediaModalCount();
+}
+
+function updateMediaModalCount() {
+  const countEl = document.getElementById('media-modal-count');
+  if (countEl) countEl.textContent = `${mediaPickerSelected.length} selected`;
+}
+
+function confirmMediaSelection() {
+  mediaPickerSelected.forEach(url => {
+    if (!galleryUrls.includes(url)) galleryUrls.push(url);
+  });
+  showGalleryPreview();
+  closeMediaPicker();
+}
+
+function closeMediaPicker() {
+  document.getElementById('media-modal').style.display = 'none';
+  document.body.style.overflow = '';
+  mediaPickerSelected = [];
 }
 
 function newProject() {
@@ -454,6 +578,7 @@ async function uploadFile(file, progressBarId) {
           const url = await task.snapshot.ref.getDownloadURL();
           progressBar.style.display = 'none';
           fill.style.width = '0%';
+          mediaLibraryCache = null; // new file — invalidate the picker cache
           resolve(url);
         } catch (err) {
           progressBar.style.display = 'none';
@@ -469,6 +594,7 @@ async function deleteStorageFile(url) {
   try {
     const ref = storage.refFromURL(url);
     await ref.delete();
+    mediaLibraryCache = null; // file removed — invalidate the picker cache
   } catch (e) {
     // File may already be deleted or be a local path — ignore
     console.warn('Could not delete file from storage:', e.message);

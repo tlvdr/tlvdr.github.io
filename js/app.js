@@ -136,7 +136,12 @@ function createProjectCard(id, data, pageType) {
 
   if (pageType === 'photography') {
     card.className = 'photo-item';
-    card.innerHTML = `<img src="${data.thumbnailUrl || ''}" alt="${data.title || ''}" loading="lazy">`;
+    card.innerHTML = `
+      <img src="${data.thumbnailUrl || ''}" alt="${data.title || ''}" loading="lazy">
+      <div class="card-overlay">
+        <div class="card-title">${data.title || ''}</div>
+      </div>
+    `;
     card.addEventListener('click', () => openPhotoSlideshow(data));
   } else {
     card.className = 'project-card';

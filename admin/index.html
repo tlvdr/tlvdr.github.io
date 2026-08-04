@@ -164,10 +164,11 @@
               <div class="upload-icon">&#128247;</div>
               <div class="upload-text">
                 <strong>Click to upload</strong> or drag and drop<br>
-                JPG, PNG, WebP (max 5MB)
+                JPG, PNG, WebP (max 25MB)
               </div>
               <input type="file" id="thumbnail-file" accept="image/*">
             </div>
+            <button type="button" class="btn btn-sm btn-outline choose-existing-btn" data-target="thumbnail" style="margin-top:10px;">Choose existing image&hellip;</button>
             <div class="progress-bar" id="thumbnail-progress" style="display:none;">
               <div class="progress-fill"></div>
             </div>
@@ -181,10 +182,11 @@
               <div class="upload-icon">&#128248;</div>
               <div class="upload-text">
                 <strong>Click to upload multiple</strong> images<br>
-                JPG, PNG, WebP (max 5MB each)
+                JPG, PNG, WebP (max 25MB each)
               </div>
               <input type="file" id="gallery-files" accept="image/*" multiple>
             </div>
+            <button type="button" class="btn btn-sm btn-outline choose-existing-btn" data-target="gallery" style="margin-top:10px;">Choose existing images&hellip;</button>
             <div class="progress-bar" id="gallery-progress" style="display:none;">
               <div class="progress-fill"></div>
             </div>
@@ -204,6 +206,23 @@
 
   <!-- Toast -->
   <div id="toast" class="toast"></div>
+
+  <!-- Media Library Modal -->
+  <div id="media-modal" class="media-modal" style="display:none;">
+    <div class="media-modal-inner">
+      <div class="media-modal-header">
+        <h3>Choose an image</h3>
+        <button type="button" class="media-modal-close" id="media-modal-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="media-modal-body" id="media-modal-body">
+        <div class="loading-spinner"></div>
+      </div>
+      <div class="media-modal-footer" id="media-modal-footer" style="display:none;">
+        <span id="media-modal-count"></span>
+        <button type="button" class="btn btn-primary btn-sm" id="media-modal-add-btn">Add Selected</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
